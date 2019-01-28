@@ -1,263 +1,302 @@
-CPSC223 -- EUGENE THOMAS
+
+  CPSC223 -- EUGENE THOMAS
 
 =======================================================================================================================================
 
-1/14/19
+  1/14/19
 
-Programming = Algorithms + Data Structures --> The two act symbiotically
+  Programming = Algorithms + Data Structures --> The two act symbiotically
 
-Categories of Algorithms:
-- Greedy
-- Divide and Conquer
-- Dynamic programming
-- Randomized
-- Backtracking
+  Categories of Algorithms:
+  - Greedy
+  - Divide and Conquer
+  - Dynamic programming
+  - Randomized
+  - Backtracking
 
-GREEDY ALGORITHMS (hill climbing algorithms)
-  - Typically for optimization
-  - i.e. you are optimizing some quantity by taking some sequence of steps
-  - always take the "best" or "locally optimal" step and never go back
-  - does NOT always lead to the best solution, but it sometimes does
+  GREEDY ALGORITHMS (hill climbing algorithms)
+    - Typically for optimization
+    - i.e. you are optimizing some quantity by taking some sequence of steps
+    - always take the "best" or "locally optimal" step and never go back
+    - does NOT always lead to the best solution, but it sometimes does
 
-  - For example, The "Change-Making Problem": given a certain value n, you must make change using the fewest number of coins.
-  ALGORITHM: Continuously subtract by 100 cents (the dollar coin) until you have reached a coin value under 25 cents.
-             Then, repeat this process with 50 cents, 25 cents, 10 cents, 5 cents, and 1 cent until you have a number of coins c.
-             This value c is the minimum number of coins necessary to make a value of n cents.
-  NOTE: THIS IS ONLY OPTIMAL FOR THE US SYSTEM WHERE THE COINS AREE STRATEGICALLY NUMBERED.
-    Take a country with "odd coins:" 40 cents, 25 cents, 5 cents, and 1 cent.
-    Take 75 cents: given the greedy method, the optimal coin return would be 4 coins (40, 25, 5, and 5); however, by inspection,
-                   the optimal distribution would be 3 coins (25, 25, 25).
+    - For example, The "Change-Making Problem": given a certain value n, you must make change using the fewest number of coins.
+    ALGORITHM: Continuously subtract by 100 cents (the dollar coin) until you have reached a coin value under 25 cents.
+               Then, repeat this process with 50 cents, 25 cents, 10 cents, 5 cents, and 1 cent until you have a number of coins c.
+               This value c is the minimum number of coins necessary to make a value of n cents.
+    NOTE: THIS IS ONLY OPTIMAL FOR THE US SYSTEM WHERE THE COINS AREE STRATEGICALLY NUMBERED.
+      Take a country with "odd coins:" 40 cents, 25 cents, 5 cents, and 1 cent.
+      Take 75 cents: given the greedy method, the optimal coin return would be 4 coins (40, 25, 5, and 5); however, by inspection,
+                     the optimal distribution would be 3 coins (25, 25, 25).
 
-  - Processor Scheduling Problems:
-    - p identical processors
-    - n independent tasks with times t1, ..., tn respective to each task Ti.
-    - Assign tasks to processors to minimize the maximum work per processor.
+    - Processor Scheduling Problems:
+      - p identical processors
+      - n independent tasks with times t1, ..., tn respective to each task Ti.
+      - Assign tasks to processors to minimize the maximum work per processor.
 
-    A practical example:
-    - Take 3 processors
-    - Take 8 tasks with the following times: 6, 4, 4, 4, 2, 5, 6, 5.
+      A practical example:
+      - Take 3 processors
+      - Take 8 tasks with the following times: 6, 4, 4, 4, 2, 5, 6, 5.
 
-SORTING ALGORITHMS
-  n items: x[0],...,x[n-1]
-  Rearranging these n terms s.t. x[0]<=x[1]<= ... <=x[n-1]
-  Given two operations: Comparison between x[i] and x[j] and Swapping x[i] and x[j]
-  A quartic runtime
-
-=======================================================================================================================================
-
-1/16/19
-
-Office Hours: Su-Th: 7-12 @ HLH17 111,113,115
-
-Programming = Algorithms + Data Structures (Wirth)
-
-DIVIDE AND CONQUER ALGORITHMS:
-
-  --> Strong induction
-  Step One: The Divide Step
-    - Divide the problem we want to solve into two or more sub-problems of the same kind.
-  Step Two: The "and" Step
-    - Solving each sub-problem using the same algorithm (solving a base case and then solving it recursively).
-  Step Three: Conquer Step
-    - Put the solutions of the sub-problem together to get the solution to the larger problem at hand.
-
-EXAMPLE 0 -- Find the largest and smallest elements of a set S of N numbers.
-  --> Let S = {x1, x2, ..., xN}
-
-  Base Case:
-    Return (x1, x1), if N = 1.
-    Return (maxS, minS), if N = 2.
-
-  ALG0: Trivial
-    Find the largest and find the smallest by iterating through S.
-    Complexity: Number of comparisons for the trivial solutions: (N-1) + (N-1) = 2N-2. --> linear runtime
-
-  ALG1: Two-Way Split
-    NOTE: Assume N is even.
-    Step One: Divide
-      - Split S into two equally sized sets T and U.
-    Step Two: And
-      - Find the largest and smallest of T and U
-    Step Three: Conquer
-      - Compare maxT to maxU and compare minT to minU.
-
-    Complexity:
-    Let C(N) = the number of comparisons for a set with size N
-    C(1) = 0
-    C(2) = 1
-    C(N) = 2C(N/2) + 2 --> Recurrence Relation
-
-  ALG2: N Over Two-Way Split
-    Step One: Divide
-      - Split S into N/2 sets of 2 elements each.
-    Step Two: And
-      - Find the largest and smallest of each subset
-    Step Three: Conquer
-      - Compare the largest and smallest elements of each set to each other
-
-EXAMPLE 1 -- Sort a set S of N elements
-  ALG0: MergeSort
-    Step Zero: Base Case
-      - If N = 1, return S.
-      - If N = 2, swap x1 and x2, if x1 > x2. else, return S as is.
-    Step One: Divide
-      - Split S into two equally sized sets T and U.
-    Step Two: And
-      - Sort T and U.
-    Step Three: Conquer
-      - Merge T and U into one sorted set.
-    Complexity: What is the number of comparisons?
-    C(1) = 0
-    C(2) = 1
-    C(N) <= 2C(N/2) + N-1 (depending on the configuration of T and U)
-    C(N) = Nlog2(N) + lower order terms.
-
-  ALG1: QuickSort (Split by Value)
-    Step Zero: Base Case
-      - If N = 1, return S.
-        If N = 2, swap x1 and x2, if x1 > x2. else, return S as is.
-    Step One: Divide
-      - Pick one index i in S to be the splitter and break S into elements with indices below and above i.
-    Step Two: And
-      - Sort both subsets
-    Step Three: Conquer
-      - SortedSubset1 | xi | SortedSubset2
-    Complexity:
-      C(k) + C(N-1-k) + N - 1.
-      Best Cases are when k is near the median --> O(nlogn)
-      Worst Cases are when k is close to the minimum/maximum --> O(n^2)
-
-DYNAMIC PROGRAMMING:
-
-Dynamic Programming is building a solution by solving all instances of a structured class of subproblems efficiently.
-
-EXAMPLE 0 --  Make change of N cents using the fewest possible coins. Find coins(k) for all 0 <= k <= N
-
-    Solving this problem takes the construction of a large recursive tree.
-    nCoins[0] = 0;
-    for (k = 1; k <= n; k++) {
-      m = 1 + nCoins[k - 1];
-      if (k >= 5) m = min(m, 1+nCoins[k-5])
-      if (k >= 10) m = min(m, 1+nCoins[k-10])
-      if (k >= 25) m = min(m, 1+nCoins[k-25])
-      if (k >= 50) m = min(m, 1+nCoins[k-50])
-      if (k >= 100) m = min(m, 1+nCoins[k-100])
-      nCoins[k] = m;
-    }
-
-    Similar to recursion + memoization (remembering values from previous recursive calls to avoid repeating them)
-
-  ALG0: Insertion Sort
-    Sort all initial sublists for k. Then use k-1 solution for k-1 to get solution for k.
-    Quadratic runtime.
+  SORTING ALGORITHMS
+    n items: x[0],...,x[n-1]
+    Rearranging these n terms s.t. x[0]<=x[1]<= ... <=x[n-1]
+    Given two operations: Comparison between x[i] and x[j] and Swapping x[i] and x[j]
+    A quartic runtime
 
 =======================================================================================================================================
 
-1/18/19
+  1/16/19
 
-C and Linux:
+  Office Hours: Su-Th: 7-12 @ HLH17 111,113,115
 
-  - The source file will be in the form x.c
-  - We will compile this code into an object file: x.o. This contains the raw machine code and its annotations.
-  - Through a process called linking, we will get an executable file x; you can run the file x.
+  Programming = Algorithms + Data Structures (Wirth)
 
-  gcc -c x.c will compile the code
-  gcc -o x x.o will link this object file into an executable file.
-  ./x will the run the file.
+  DIVIDE AND CONQUER ALGORITHMS:
 
-  make --> An automatic process for making executables
-       --> You must state the dependencies (what must be updated) when something changes/doesn't exist.
-       --> Gives commands to create nonexistent/out-of-date files.
+    --> Strong induction
+    Step One: The Divide Step
+      - Divide the problem we want to solve into two or more sub-problems of the same kind.
+    Step Two: The "and" Step
+      - Solving each sub-problem using the same algorithm (solving a base case and then solving it recursively).
+    Step Three: Conquer Step
+      - Put the solutions of the sub-problem together to get the solution to the larger problem at hand.
 
-       FOR EXAMPLE:
-        cc = gcc // symbolic constant
-        CFLAGS = -g3  -std = c99 -pedantic -Wall
-        C2html: C2html.o
-          $ {cc} ${CFLAG} -o C2html C2html.o
-                          -o $@ $<
-        // The following two lines are built-on and not necessary
-        C2html.o: C2html.c
-          $ {cc} ${CFLAGS} -c C2html.c
+  EXAMPLE 0 -- Find the largest and smallest elements of a set S of N numbers.
+    --> Let S = {x1, x2, ..., xN}
 
-        % make C2html // makes C2html
-        % make [first target]//
+    Base Case:
+      Return (x1, x1), if N = 1.
+      Return (maxS, minS), if N = 2.
 
-RANDOMIZED ALGORITHMS
+    ALG0: Trivial
+      Find the largest and find the smallest by iterating through S.
+      Complexity: Number of comparisons for the trivial solutions: (N-1) + (N-1) = 2N-2. --> linear runtime
 
-  - Uses a source of random bits to make their decisions. --> Non-deterministic.
-  - Las Vegas Algorithms --> always correct, usually fast
-  - Monte Carlo Algorithms --> always fast, usually correct
-                           --> The probability of an error decreases as time/number of trials increases.
+    ALG1: Two-Way Split
+      NOTE: Assume N is even.
+      Step One: Divide
+        - Split S into two equally sized sets T and U.
+      Step Two: And
+        - Find the largest and smallest of T and U
+      Step Three: Conquer
+        - Compare maxT to maxU and compare minT to minU.
 
-  EXAMPLE -- QuickSort (Las Vegas Type Algorithm)
-    - Performance depended on choice of splitter.
-    Optimal: logilinear runtime (nlogn)
-    Pessimal: quadratic runtime
+      Complexity:
+      Let C(N) = the number of comparisons for a set with size N
+      C(1) = 0
+      C(2) = 1
+      C(N) = 2C(N/2) + 2 --> Recurrence Relation
 
-    ALG1: Pick a random element in S
-    ALG2: Randomly permute the items before calling QuickSort and you always choose the first element
-    --> Pessimal splitters are very unlikely. Therefore, this algorithm has O(nlogn).
+    ALG2: N Over Two-Way Split
+      Step One: Divide
+        - Split S into N/2 sets of 2 elements each.
+      Step Two: And
+        - Find the largest and smallest of each subset
+      Step Three: Conquer
+        - Compare the largest and smallest elements of each set to each other
 
-NUANCES OF C
- - Block comments only /* */
- - C99 and onward have line comments also //
- - \n = New Line in a C string literal
- - getchar() returns an integer, not a char.
-    --> 256 different characters
-    --> It needs to be indicated if there are no other characters.
-    --> Therefore, there are 257 different values for getchar()
-    --> Char is 8 bits (256 uniquee values)
-    --> getchar() >= 0 if char, -1 if EOF.
-    char c = getchar() will map EOF and some characters to the same value.
+  EXAMPLE 1 -- Sort a set S of N elements
+    ALG0: MergeSort
+      Step Zero: Base Case
+        - If N = 1, return S.
+        - If N = 2, swap x1 and x2, if x1 > x2. else, return S as is.
+      Step One: Divide
+        - Split S into two equally sized sets T and U.
+      Step Two: And
+        - Sort T and U.
+      Step Three: Conquer
+        - Merge T and U into one sorted set.
+      Complexity: What is the number of comparisons?
+      C(1) = 0
+      C(2) = 1
+      C(N) <= 2C(N/2) + N-1 (depending on the configuration of T and U)
+      C(N) = Nlog2(N) + lower order terms.
 
-=======================================================================================================================================
+    ALG1: QuickSort (Split by Value)
+      Step Zero: Base Case
+        - If N = 1, return S.
+          If N = 2, swap x1 and x2, if x1 > x2. else, return S as is.
+      Step One: Divide
+        - Pick one index i in S to be the splitter and break S into elements with indices below and above i.
+      Step Two: And
+        - Sort both subsets
+      Step Three: Conquer
+        - SortedSubset1 | xi | SortedSubset2
+      Complexity:
+        C(k) + C(N-1-k) + N - 1.
+        Best Cases are when k is near the median --> O(nlogn)
+        Worst Cases are when k is close to the minimum/maximum --> O(n^2)
 
-1/28/18
+  DYNAMIC PROGRAMMING:
 
-"Programming = Algorithms + Data Structures"
+  Dynamic Programming is building a solution by solving all instances of a structured class of subproblems efficiently.
 
-Data Structures
+  EXAMPLE 0 --  Make change of N cents using the fewest possible coins. Find coins(k) for all 0 <= k <= N
 
-The Array --> The most elementary data structure.
-          --> Every other data structure is implemented in terms of arrays.
-          --> Begins at location 0, and usually goes up to a number 2^n-1
-          --> Begin with general arrays and then specialize arrays in C.
+      Solving this problem takes the construction of a large recursive tree.
+      nCoins[0] = 0;
+      for (k = 1; k <= n; k++) {
+        m = 1 + nCoins[k - 1];
+        if (k >= 5) m = min(m, 1+nCoins[k-5])
+        if (k >= 10) m = min(m, 1+nCoins[k-10])
+        if (k >= 25) m = min(m, 1+nCoins[k-25])
+        if (k >= 50) m = min(m, 1+nCoins[k-50])
+        if (k >= 100) m = min(m, 1+nCoins[k-100])
+        nCoins[k] = m;
+      }
 
-1-Dimensional Array: A sequence of elements, each of which are of the same type.
-          --> a[l], a[l+1], ..., a[u]
-          --> l = lower bound on the index, u = upper bound on the index
-          --> u-l+1 = number of elements in the array (the length)
-          --> In C, l = 0. In MatLab, l = 1. In Fortran, l defaults to 1 but can be changed.
+      Similar to recursion + memoization (remembering values from previous recursive calls to avoid repeating them)
 
-Why use arrays?
-          --> Random access (you can get to any element of the array by calling on an index)
-              at "guaranteed" [memory hierarchy, which will be seen in 323] constant time, independent of the number of elements.
-              [unlike structures like linked lists].
-          --> O(1) - Constant time
-          --> Table lookup can be faster than computation. 
+    ALG0: Insertion Sort
+      Sort all initial sublists for k. Then use k-1 solution for k-1 to get solution for k.
+      Quadratic runtime.
 
-Misc:
-          --> int: 4 bytes
-          --> char: 1 byte
-          --> double: 8 bytes
+==========================================================================================================================================
 
+  1/18/19
 
+  C and Linux:
 
+    - The source file will be in the form x.c
+    - We will compile this code into an object file: x.o. This contains the raw machine code and its annotations.
+    - Through a process called linking, we will get an executable file x; you can run the file x.
 
+    gcc -c x.c will compile the code
+    gcc -o x x.o will link this object file into an executable file.
+    ./x will the run the file.
 
+    make --> An automatic process for making executables
+         --> You must state the dependencies (what must be updated) when something changes/doesn't exist.
+         --> Gives commands to create nonexistent/out-of-date files.
 
+         FOR EXAMPLE:
+          cc = gcc // symbolic constant
+          CFLAGS = -g3  -std = c99 -pedantic -Wall
+          C2html: C2html.o
+            $ {cc} ${CFLAG} -o C2html C2html.o
+                            -o $@ $<
+          // The following two lines are built-on and not necessary
+          C2html.o: C2html.c
+            $ {cc} ${CFLAGS} -c C2html.c
 
+          % make C2html // makes C2html
+          % make [first target]//
 
+  RANDOMIZED ALGORITHMS
 
+    - Uses a source of random bits to make their decisions. --> Non-deterministic.
+    - Las Vegas Algorithms --> always correct, usually fast
+    - Monte Carlo Algorithms --> always fast, usually correct
+                             --> The probability of an error decreases as time/number of trials increases.
 
+    EXAMPLE -- QuickSort (Las Vegas Type Algorithm)
+      - Performance depended on choice of splitter.
+      Optimal: logilinear runtime (nlogn)
+      Pessimal: quadratic runtime
 
+      ALG1: Pick a random element in S
+      ALG2: Randomly permute the items before calling QuickSort and you always choose the first element
+      --> Pessimal splitters are very unlikely. Therefore, this algorithm has O(nlogn).
 
+  NUANCES OF C
+   - Block comments only /* */
+   - C99 and onward have line comments also //
+   - \n = New Line in a C string literal
+   - getchar() returns an integer, not a char.
+      --> 256 different characters
+      --> It needs to be indicated if there are no other characters.
+      --> Therefore, there are 257 different values for getchar()
+      --> Char is 8 bits (256 uniquee values)
+      --> getchar() >= 0 if char, -1 if EOF.
+      char c = getchar() will map EOF and some characters to the same value.
 
+===========================================================================================================================================
 
+  1/28/18
 
+  "Programming = Algorithms + Data Structures"
 
+  Data Structures
 
+  The Array --> The most elementary data structure.
+            --> Every other data structure is implemented in terms of arrays.
+            --> Begins at location 0, and usually goes up to a number 2^n-1
+            --> Begin with general arrays and then specialize arrays in C.
 
+  1-Dimensional Array: A sequence of elements, each of which are of the same type.
+            --> a[l], a[l+1], ..., a[u]
+            --> l = lower bound on the index, u = upper bound on the index
+            --> u-l+1 = number of elements in the array (the length)
+            --> In C, l = 0. In MatLab, l = 1. In Fortran, l defaults to 1 but can be changed.
 
+  Why use arrays?
+            --> Random access (you can get to any element of the array by calling on an index)
+                at "guaranteed" [memory hierarchy, which will be seen in 323] constant time, independent of the number of elements.
+                [unlike structures like linked lists].
+            --> O(1) - Constant time
+            --> Table lookup can be faster than computation.
+            --> Count the number of 1-bits in int/oneBits[i] = #1-bits in
+            --> Total space = (u-l+1)*size(type)
 
-.
+  Multi-Dimensional Array (2D Array):
+
+    b[i,j] where l <= i <= u and p <= j <= q.
+
+    Row-wise storage (used by C):
+    Given b[i,j]:
+      (i-l)*(q-p+1)*size(type) = storage for earlier rows.
+      (j-p)*size(type) = storage for the earlier elements of the ith row.
+
+    Column-wise storage (used by Fortran):
+      (j-p)*(u-l+1)*size(type) = storage for earlier columns.
+      (i-l)*size(type) = storage for earlier elements of the jth column.
+
+  Distances between pairs of cities:
+    Taking advantage of symmetries.
+    Sequential allocation for lower triangular array
+      --> this leads to there being no waste
+      --> Store by rows
+      --> for simplicity, this will be a 1-based system.
+      --> addr(c[i,j]) = addr(c[1,1]) + (i-1)(i)/2 * size(type) + (j-1)*size(type)
+
+    For Column-Wise Storage:
+      --> addr(c[i,j]) = addr(c[1,1]) + (n(j-1)-(j-1)(j-2)/2) * size(type) + (i-j)*size(type)
+
+  Arrays in C:
+    Essential Points:
+      --> A[i] --> One-dimensional arrays
+      --> B[i][j] --> Two-dimensional arrays
+      --> All arrays are zero-based
+      --> C only has one-d arrays (any 2-d arrays are just arrays of arrays that can be indexed).
+      --> The size must be known when the declaration is executed.
+        Ex: int n;
+            scanf("%d", &n);
+            int A[n]; --> checks if n is greater than or equal to 0.
+    Exceptions:
+      --> int digits[] = [0, 1, ..., 9]; --> C will count the number of initializers.
+      --> extern int digits[];
+      --> int sum (int digits[], int n)
+    Things that can be done to Arrays:
+      --> Determine the size of the array. sizeof(A) = number of elements in A * size(type).
+      --> Get a pointer to the 0th element of the array.
+      --> All other operations are done with pointers.
+          --> array[index] --> * (array + index).
+    Command-Line arguments: % submit 1 C2html.c --> submit, 1, C2 are all arguments.
+      int main (int argc, char *argv[]) {
+        // argc = number of arguments including the name of the code
+        // argv = an array of strings (arrays of chars).
+        // argv[0] = name of program
+        // argv[argc] = NULL = 0
+      }
+      % Psched #proc [runtimes of the tasks]* [flag]*
+      To convert to integers: atoi(argv[1]) --> int
+    What does it mean to "Fail Gracefully?"
+      --> Do not fall into an infinite loop.
+      --> Check the test cases.
+      strcmp(string, "-opt") --> returns 0 is the string contains "-opt", will return something nonzero otherwise.
+
+  Misc:
+      --> int: 4 bytes
+      --> char: 1 byte
+      --> double: 8 bytes

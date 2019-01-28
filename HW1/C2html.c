@@ -19,16 +19,15 @@
   - Each & character is replaced by the string '&amp;'.
   - Each < character is replaced by the string '&lt;'.
   - Each > character is replaced by the string '&gt;'.
-  methodNotes:
-  0. This method will yield a warning, but it is written later that this is
-     only for &, <, and >.
 */
 
-char * singleChar (char c)
+int singleChar (char c)
 {
-    if (c == '&') return "&amp;";
-    if (c == '<') return "&lt;";
-    if (c == '>') return "&gt";
+    if (c == '&') printf("&amp;");
+    if (c == '<') printf("&lt;");
+    if (c == '>') printf("&gt");
+    else printf("%c", c);
+    return 0;
 }
 
 /*
@@ -52,7 +51,7 @@ char * singleChar (char c)
 */
 
 // see MethodNote0
-char * stringHandling (char * c)
+char stringHandling ()
 {
   char initChar = getchar();
   if ((initChar == 'a') || (initChar == 'b')) {
@@ -81,7 +80,7 @@ char * stringHandling (char * c)
 /*
   As advised by TA Isabelle: Save this for last
 
-  Method X: char commentHandling (char c)
+  Method X:
 
   Purpose: To reformat comments.
 
@@ -109,10 +108,7 @@ char * commentHandling (char * c)
         assumptions is violated.
 */
 
-int main()
+main()
 {
-    char * string = "\"Hello World!\"";
-    char * retStr = stringHandling(string);
-    printf("<PRE>%s\n</PRE>", retStr);
-    return 0;
+
 }

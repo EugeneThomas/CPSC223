@@ -7,12 +7,12 @@
 */
 
 #include <stdio.h>
-
+#include <string.h>
 /*
 
   Objective (from Prelim Specification):
 
-  A filter "C2html" that copies a C program from the standard input to
+  A filter 'C2html' that copies a C program from the standard input to
   the standard output, formatting it for viewing by an HTML browser.
 
 */
@@ -25,9 +25,12 @@
 
 */
 
-char preAndPost (char c)
+char * preAndPost (char *c)
 {
-  return "<PRE>"+c+"\n</PRE>\n";
+  char * retStr = "<PRE>";
+  retStr = strcat(retStr, c);
+  retStr = strcat(retStr, "\n</PRE>\n");
+  return retStr;
 }
 
 /*
@@ -37,18 +40,17 @@ char preAndPost (char c)
  Purpose: Takes care of single character stuff
 
  Regulations:
-  - Each & character is replaced by the string "&amp;".
-  - Each < character is replaced by the string "&lt;".
-  - Each > character is replaced by the string "&gt;".
+  - Each & character is replaced by the string '&amp;'.
+  - Each < character is replaced by the string '&lt;'.
+  - Each > character is replaced by the string '&gt;'.
 
 */
 
-char singleChar (char c)
+char * singleChar (char c)
 {
-  if (c == "&") return "&amp;";
-  if (c == "<") return "&lt;";
-  if (c == ">") return "&gt;";
-  else return c;
+  if (c == '&') return "&amp;";
+  if (c== '<') return "&lt;";
+  else return "&gt"; // if (c == '>')
 }
 
 /*
@@ -57,14 +59,43 @@ char singleChar (char c)
   Purpose: Takes care of string literals.
 
   Regulations:
-    - Each string literal is bracketed by the strings "<B>" and "</B>".
+    - Each string literal is bracketed by the strings '<B>' and '</B>'.
     - handle string literals (i.e., character constants and strings) correctly;
     - handle escaped characters within string literals correctly;
+
+  methodNotes:
+
+    1. Here, the following three lines mean the following:
+      If this character does not match the initial quote (which means the quote is not closed):
+      You then add this to the return char and check for the next character to be closed.
+
+    2. Here, we add the nextChars until there are none left.
+
 */
 
-char stringHandling (char c)
+// see MethodNote0
+char stringHandling (char c[])
 {
-
+  char initChar = c.getchar();
+  if ((initChar == 'a') || (initChar == 'b')) {
+    char * retStr = "<B>"; // Return string literal
+    retStr = strcat(retStr, initChar); // Adds the initial Character
+    // See methodNote1 for this:
+    char nextChar = c.getchar();
+    while ((nextChar != initChar) {
+        retStr = strcat(retStr, nextChar);
+        nextChar = c.getchar();
+    }
+    retStr = strcat(retStr, nextChar); // adds the end quote
+    retStr = strcat(retStr, "</B>"); //and the </B> tag
+    // See methodNote2 for this:
+    while (nextChar != EOF) {
+      nextChar = c.getchar();
+      retStr = strcat(retStr, nextChar);
+    }
+  else {
+    return c; //If this is not a quote, this is irrelevant and retuns the s
+  }
 }
 
 /*
@@ -75,14 +106,14 @@ char stringHandling (char c)
   Purpose: To reformat comments.
 
   Regulations:
-  Each comment is bracketed by the strings "<I>" and "</I>".
+  Each comment is bracketed by the strings '<I>' and '</I>'.
   handle line splices correctly
   handle both block and line comments correctly
 */
 
 char commentHandling (char c)
 {
-
+  return '';
 }
 
 /*
@@ -93,12 +124,13 @@ char commentHandling (char c)
   Regulations:
     - read from stdin and write to stdout but do no other input or output;
     - not use arrays or pointers; and
-    - fail "gracefully" (i.e., neither go into an infinite loop nor cause a
+    - fail 'gracefully' (i.e., neither go into an infinite loop nor cause a
         memory dump) if the input is not a legitimate C program or any of these
         assumptions is violated.
 */
 
 main()
 {
-    printf("hello, world\n");
+    string = ' 'This mad city I run my person' ';
+    printf(stringHandling(string) + '\n');
 }

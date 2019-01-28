@@ -1,41 +1,35 @@
 /*
-
   Eugene Thomas
   CS223
   Homework 1
-
 */
 
 #include <stdio.h>
 #include <string.h>
 
 /*
-
   Objective (from Prelim Specification):
-
   A filter 'C2html' that copies a C program from the standard input to
   the standard output, formatting it for viewing by an HTML browser.
-
 */
 
 /*
-
  Method 1: char singleChar (char c)
-
  Purpose: Takes care of single character cases.
-
  Regulations:
   - Each & character is replaced by the string '&amp;'.
   - Each < character is replaced by the string '&lt;'.
   - Each > character is replaced by the string '&gt;'.
-
+  methodNotes:
+  0. This method will yield a warning, but it is written later that this is
+     only for &, <, and >.
 */
 
 char * singleChar (char c)
 {
     if (c == '&') return "&amp;";
     if (c == '<') return "&lt;";
-    if (c == '>') return "&gt"; 
+    if (c == '>') return "&gt";
 }
 
 /*

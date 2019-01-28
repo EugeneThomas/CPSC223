@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <string.h>
+
 /*
 
   Objective (from Prelim Specification):
@@ -19,25 +20,9 @@
 
 /*
 
- Method 1: preAndPost (char c):
+ Method 1: char singleChar (char c)
 
- Purpose: Adds the <PRE> and </PRE> before and after the program
-
-*/
-
-char * preAndPost (char *c)
-{
-  char * retStr = "<PRE>";
-  retStr = strcat(retStr, c);
-  retStr = strcat(retStr, "\n</PRE>\n");
-  return retStr;
-}
-
-/*
-
- Method 2: char singleChar (char c)
-
- Purpose: Takes care of single character stuff
+ Purpose: Takes care of single character cases.
 
  Regulations:
   - Each & character is replaced by the string '&amp;'.
@@ -48,13 +33,13 @@ char * preAndPost (char *c)
 
 char * singleChar (char c)
 {
-  if (c == '&') return "&amp;";
-  if (c== '<') return "&lt;";
-  else return "&gt"; // if (c == '>')
+    if (c == '&') return "&amp;";
+    if (c == '<') return "&lt;";
+    if (c == '>') return "&gt"; 
 }
 
 /*
-  Method 3: char stringHandling (char c)
+  Method 2: char stringHandling (char c)
 
   Purpose: Takes care of string literals.
 
@@ -65,6 +50,7 @@ char * singleChar (char c)
 
   methodNotes:
 
+    0 (Method Explained).
     1. Here, the following three lines mean the following:
       If this character does not match the initial quote (which means the quote is not closed):
       You then add this to the return char and check for the next character to be closed.
@@ -74,25 +60,27 @@ char * singleChar (char c)
 */
 
 // see MethodNote0
-char stringHandling (char c[])
+char * stringHandling (char * c)
 {
-  char initChar = c.getchar();
+  char initChar = getchar();
   if ((initChar == 'a') || (initChar == 'b')) {
     char * retStr = "<B>"; // Return string literal
-    retStr = strcat(retStr, initChar); // Adds the initial Character
+    retStr = strcat(retStr, initChar); // Adds the initial Character to retStr
     // See methodNote1 for this:
-    char nextChar = c.getchar();
-    while ((nextChar != initChar) {
+    char nextChar = getchar();
+    while (nextChar != initChar) {
         retStr = strcat(retStr, nextChar);
-        nextChar = c.getchar();
+        nextChar = getchar();
     }
     retStr = strcat(retStr, nextChar); // adds the end quote
     retStr = strcat(retStr, "</B>"); //and the </B> tag
     // See methodNote2 for this:
     while (nextChar != EOF) {
-      nextChar = c.getchar();
+      nextChar = getchar();
       retStr = strcat(retStr, nextChar);
     }
+    return retStr;
+  }
   else {
     return c; //If this is not a quote, this is irrelevant and retuns the s
   }
@@ -111,9 +99,9 @@ char stringHandling (char c[])
   handle both block and line comments correctly
 */
 
-char commentHandling (char c)
+char * commentHandling (char * c)
 {
-  return '';
+  return "";
 }
 
 /*
@@ -129,8 +117,10 @@ char commentHandling (char c)
         assumptions is violated.
 */
 
-main()
+int main()
 {
-    string = ' 'This mad city I run my person' ';
-    printf(stringHandling(string) + '\n');
+    char * string = "\"Hello World!\"";
+    char * retStr = stringHandling(string);
+    printf("<PRE>%s\n</PRE>", retStr);
+    return 0;
 }

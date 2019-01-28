@@ -5,7 +5,6 @@
 */
 
 #include <stdio.h>
-#include <string.h>
 
 /*
   Objective (from Prelim Specification):
@@ -50,7 +49,6 @@ char * singleChar (char c)
       You then add this to the return char and check for the next character to be closed.
 
     2. Here, we add the nextChars until there are none left.
-
 */
 
 // see MethodNote0
@@ -59,19 +57,19 @@ char * stringHandling (char * c)
   char initChar = getchar();
   if ((initChar == 'a') || (initChar == 'b')) {
     char * retStr = "<B>"; // Return string literal
-    retStr = strcat(retStr, initChar); // Adds the initial Character to retStr
+    retStr = retStr""initChar; // Adds the initial Character to retStr
     // See methodNote1 for this:
     char nextChar = getchar();
     while (nextChar != initChar) {
-        retStr = strcat(retStr, nextChar);
+        retStr = retStr nextChar;
         nextChar = getchar();
     }
-    retStr = strcat(retStr, nextChar); // adds the end quote
-    retStr = strcat(retStr, "</B>"); //and the </B> tag
+    retStr = retStr nextChar; // adds the end quote
+    retStr = retStr "</B>"; //and the </B> tag
     // See methodNote2 for this:
     while (nextChar != EOF) {
       nextChar = getchar();
-      retStr = strcat(retStr, nextChar);
+      retStr = retStr nextChar;
     }
     return retStr;
   }

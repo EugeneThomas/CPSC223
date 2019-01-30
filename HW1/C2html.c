@@ -38,13 +38,14 @@ int main()
 
 
   int inString = 0; // returns 1 if currently in a quote, returns 0 if not.
+  int inComment = 0; // returns 1 if in line comment, returns 0 if not.
   char c = getchar(); // gets the first character
 
   // WHILE THE CODE IS NOT FINISHED...
 
   while (c != EOF) {
 
-    runDown:
+    cases:
 
     // COMMENT HANDLING BEGIN
 
@@ -54,22 +55,28 @@ int main()
       }
       else {
         char d = getchar(); // d is the next character
-        if (d == '/') goto single; // if a single line comment...
-        else goto block; // if a block comment
+        if (d == '/') {  // if a single line comment...
+          printf("<I>//");
+          goto single;
+        }
+        else {// if a block comment
+          printf("<I>/*");
+          goto block;
+        }
 
         // if this is a single line comment...
         single:
-          printf("<I>//");
+          inComment = 1;
           c = getchar();
           while (c != '\n') {
-            singleChar(c);
+            goto cases;
             c = getchar();
           }
+          inComment = 0;
           printf("</I>");
 
         // if this is a block comment...
         block:
-          printf("<I>/*");
           c = getchar();
           while (c != '*' && getchar() != '/') {
             ungetchar(c);
@@ -116,7 +123,33 @@ int main()
 
     // BACKWARD SLASH HANDLING BEGIN -- LINE SPLICES AND ESCAPES
 
-    
+    else if (c == '\\') {
+
+      if (inComment == 1) { // this means that there is a line splice in a line comment.
+        if (getchar() == '\n') {
+          goto single;
+        }
+        else {
+          c = getchar();
+          goto cases;
+        }
+      }
+
+      else {
+        if (inString == 1) {
+          if (getchar() == '\n') {
+            
+          }
+          else {
+            c = getchar();
+            goto cases;
+          }
+        }
+        else {}
+      }
+
+    }
+
     // FINAL CASE: not a special case
 
     else {
@@ -128,5 +161,6 @@ int main()
   }
 
   printf("</PRE>"); // finish by printing out the final PRE tag.
+
   return 0;
 }

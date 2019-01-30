@@ -300,3 +300,42 @@
       --> int: 4 bytes
       --> char: 1 byte
       --> double: 8 bytes
+
+===========================================================================================================================================
+
+  1/30/19
+
+  Handling Command Line Arguments -- Dealing with Arrays
+
+      int main (int argc, char *argv[]) {
+        // argc = number of arguments including the name of the code
+        // argv = an array of strings (arrays of chars).
+        // argv[0] = name of program
+        // argv[argc] = NULL = 0
+      }
+
+  Converting a string to an integer
+    atoi (char *s); --> returns an integer for an inputted string.
+
+  Test value of the string
+    strcmp(char *s, char *t); --> return a 0 if equal.
+                              --> return non-zero otherwise.
+
+  Passing Arrays to Functions
+    --> C passes args to functions by value (i.e. the value of each argument to function
+    is computed and that value is passed.)
+    --> Cannot change value of variable from within a function.
+        void zap (int x) {x = 0;}
+        in the main()...
+        int a = 1;
+        zap(a); --> since it's pass by value, a remains unchanged.
+        return a;
+        What is a?
+        a = 1 !!!
+
+  Looping Constructs
+    --> for (<>;<>;<>)
+    --> while ()
+    --> do... while (); 
+    --> "Test at the top": for and while loops
+    --> "Test at the bottom": executed at least once

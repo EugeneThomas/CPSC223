@@ -35,11 +35,21 @@ void singleChar (char c)
 int main()
 {
   printf("<PRE>"); // Begin with PRE tag
-  int inQuote = 0; // returns 1 if currently in a quote, returns 0 if not.
+
+
+  int inString = 0; // returns 1 if currently in a quote, returns 0 if not.
   char c = getchar(); // gets the first character
-  while (c != EOF) { // while there is a next character in the code
-    if (c == '/') { // handling comments
-      if (inQuote == 1) {
+
+  // WHILE THE CODE IS NOT FINISHED...
+
+  while (c != EOF) {
+
+    runDown:
+
+    // COMMENT HANDLING BEGIN
+
+    if (c == '/') {
+      if (inString == 1) {
         printf("%c", c); // If it's in a quote, it cannot be processed as a comment.
       }
       else {
@@ -66,11 +76,55 @@ int main()
             singleChar(c);
             c = getchar();
           }
-          printf("*/</I>");
+          printf("<*//I>");
       }
     }
 
-  c = getchar();
+    // COMMENT HANDLING END
+
+    // STRING LITERAL HANDLING BEGIN
+
+    else if (c == '"') { // if the next character denotes the beginning of the string...
+      if (inString == 0) {
+        inString = 1;
+        printf("<B>\"");
+        c = getchar();
+        while (c != '"') {
+          goto runDown;
+          c = getchar();
+        }
+        inString = 0;
+        printf("\"</B>");
+      }
+     else {
+       printf("\"</B>");
+     }
+    }
+
+    // STRING LITERAL HANDLING END
+
+    // CHARACTER HANDLING BEGIN
+
+    else if (c == '\'') { // if the next character is the beginning of a string....
+      printf("<B>\'");
+      printf("%c", singlechar(getchar()));
+      getchar(); // to process the closing apostrophe.
+      printf("\'</B>");
+    }
+
+    // CHARACTER HANDLING END
+
+    // BACKWARD SLASH HANDLING BEGIN -- LINE SPLICES AND ESCAPES
+
+    
+    // FINAL CASE: not a special case
+
+    else {
+      singlechar(c); // evaluate the character to see if it must be converted.
+    }
+
+  c = getchar(); // AT THE END OF EACH EVALUATION, YOU ALWAYS GET THE NEXT CHARACTER.
+
   }
 
   printf("</PRE>"); // finish by printing out the final PRE tag.

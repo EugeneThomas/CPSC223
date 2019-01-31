@@ -62,6 +62,21 @@ int main()
           printf("<I>//"); // you go to the single comment section. 
           goto single;
         }
+        else if (currChar == '\\' && getchar() == '\n') {
+          printf("<I>/\\\n");
+          while (currChar == '\\' && getchar() == '\n') {
+              printf("\\\n"); 
+              currChar = getchar();
+            }
+          if (currChar == '/') {  // if a single line comment...
+            printf("/"); // you go to the single comment section. 
+            goto single;
+          }
+          else  {// if a block comment
+            printf("*");
+            goto block;
+          }
+        }
         else  {// if a block comment
           printf("<I>/*");
           goto block;

@@ -1,23 +1,5 @@
-char *hdr = "Escaped double quote is string\n";
+char *hdr = "Line splice within start-comment";
 
-char  *aardvark = "\"",  *barnacle = "\"";
-
-char  *cardinal = "\"",                 /* Two-line version */
-      *devilray = "\"";
-
-char  *elephant; 
-
-// E\
-E\
-E\
-E\
-\
-\
-
-"This \
-is\
-the\ 
-quotacion"
-
-// E
-
+char aardvark /\
+* is in season */;
+char barnacle;

@@ -6,10 +6,5 @@ int main() {
 
     greet (<B>"Hello world%c\"</B>, c);
     return 0;
-    <I>// "this is just a comment"</I>
-    <I>// this is just \
-    a comment</I>
-    <B>"THIS IS JUST \
-    UN QUOTE"</B>
 }
 </PRE>

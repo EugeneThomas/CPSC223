@@ -132,8 +132,9 @@ int main()
           printf("%c", currChar); // print the '*'. 
 
           // to test the star position 
-          char testChar = getchar(); 
+          char testChar = getchar(); // next position 
           if (testChar != '\\' && testChar != '/') {
+            currChar = testChar; 
             goto whileLoop; // * is used a normal character. 
           } 
           else if (testChar == '\\') {
@@ -145,6 +146,7 @@ int main()
               goto endComment;
             }
             else {
+              currChar = testChar; 
               goto whileLoop; 
             }
           }

@@ -133,19 +133,22 @@ int main()
 
           // to test the star position 
           char testChar = getchar(); // next position 
-          if (testChar != '\\' && testChar != '/') {
-            currChar = testChar; 
-            goto whileLoop; // * is used a normal character. 
+
+          if (testChar != '\\' && testChar != '/') { // if the asterisk is not a sign of the end of a comment...
+            currChar = testChar; // change the current character to the one tested. 
+            goto whileLoop; // process this next character accordingly 
           } 
-          else if (testChar == '\\') {
-            while (testChar == '\\' && getchar() == '\n') {
+
+          else if (testChar == '\\') { // if there is a line splice... 
+            while (testChar == '\\' && getchar() == '\n') { // while line splices continue... 
               printf("\\\n"); 
               testChar = getchar();
             }
-            if (testChar == '/') {
+            if (testChar == '/') { // if the first non-splice is an end quote... 
               goto endComment;
             }
             else {
+              // otherwise... 
               currChar = testChar; 
               goto whileLoop; 
             }

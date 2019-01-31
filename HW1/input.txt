@@ -1,6 +1,10 @@
-char flatworms/\
+char flatworms
 \
+/\
 \
+/e\
+e; 
+/\
 * is in season */;
 
 char goldfish;

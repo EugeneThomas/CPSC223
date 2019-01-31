@@ -1,6 +1,10 @@
-<PRE>char flatworms<I>/\
+<PRE>char flatworms
 \
+<I>/\
 \
+/e\
+e; </I>
+<I>/\
 * is in season */</I>;
 
 char goldfish;

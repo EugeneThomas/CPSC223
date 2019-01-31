@@ -1,0 +1,13 @@
+/* test.c */
+main() { // hey what's up hello
+  print ("Hello <&>!\n");  // Hello world!
+  // Hi \ 
+  world. 
+  /* you're 
+  		&>>> 
+  		too 
+  		cool 
+  		*/ 
+  		'g' 
+  		"fjfe9v"
+}

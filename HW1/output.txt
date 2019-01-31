@@ -1,0 +1,14 @@
+<PRE><I>/* test.c */</I>
+main() { <I>// hey what's up hello</I>
+  print (<B>"Hello &lt&amp&gt!\n"</B>);  <I>// Hello world!</I>
+  <I>// Hi \ </I>
+  world. 
+  <I>/* you're 
+  		&amp&gt&gt&gt 
+  		too 
+  		cool 
+  		*/</I> 
+  		<B>'g'</B> 
+  		<B>"fjfe9v"</B>
+}
+</PRE>

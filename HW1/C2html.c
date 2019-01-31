@@ -35,102 +35,110 @@ void singleChar (char c)
 int main()
 {
   printf("<PRE>"); // Begin with PRE tag
-
-
   int inString = 0; // returns 1 if currently in a quote, returns 0 if not.
   int inComment = 0; // returns 1 if in line comment, returns 0 if not.
-  char c = getchar(); // gets the first character
+  char currChar = getchar(); // gets the first character
 
   // WHILE THE CODE IS NOT FINISHED...
 
-  while (c != EOF) {
+  while (currChar != EOF) {
+
+    // the initial goto: 
 
     cases:
 
     // COMMENT HANDLING BEGIN
 
-    if (c == '/') {
+    if (currChar == '/') {
+
       if (inString == 1) {
-        printf("%c", c); // If it's in a quote, it cannot be processed as a comment.
+        printf("%c", currChar); // If it's in a quote, it cannot be processed as a comment.
       }
-      else {
-        char d = getchar(); // d is the next character
-        if (d == '/') {  // if a single line comment...
-          printf("<I>//");
+
+      else { // if it is not in a quote 
+        inComment = 1; // you mark it as a part of the comment.
+        currChar = getchar(); // get the next character 
+        if (currChar == '/') {  // if a single line comment...
+          printf("<I>//"); // you go to the single comment section. 
           goto single;
         }
-        else {// if a block comment
+        else  {// if a block comment
           printf("<I>/*");
           goto block;
         }
 
         // if this is a single line comment...
         single:
-          inComment = 1;
-          c = getchar();
-          while (c != '\n') {
-            goto cases;
-            c = getchar();
-          }
-          inComment = 0;
-          printf("</I>");
+          currChar = getchar(); // you get the next character 
+          while (currChar != '\n') { // while the device is on the same line. 
+            singleChar(currChar); // you print the appropriate form of the current character. 
+            currChar = getchar(); // you get the next character 
+          } // this repeats until you reach a new line. once that is met... 
+          printf("</I>\n"); // you print the ending tag 
+          currChar = getchar(); // you get the next character post-comment
+          inComment = 0; // you unmark it as part of a comment. 
+          goto cases; // you begin back at cases 
+     
 
         // if this is a block comment...
         block:
-          c = getchar();
-          while (c != '*' && getchar() != '/') {
-            ungetchar(c);
-            singleChar(c);
-            c = getchar();
+          currChar = getchar(); // get the next character 
+          char nextChar = getchar(); // get the character after that
+          while (currChar != '*' || nextChar != '/') { // if this doesn't close the comment... 
+            singleChar(currChar); // print the current character 
+            ungetchar(nextChar);  // these three lines turn current into next and next into the one after. 
+            currChar = getchar(); 
+            nextChar = getchar(); 
           }
-          printf("<*//I>");
-      }
+          printf("*/</I>"); // print out ending tag 
+          currChar = getchar(); // you get the next character post-comment 
+          inComment = 0; // unmarks as part of comment 
+          goto cases; // go back to cases
+       }
     }
 
     // COMMENT HANDLING END
 
     // STRING LITERAL HANDLING BEGIN
 
-    else if (c == '"') { // if the next character denotes the beginning of the string...
-      if (inString == 0) {
-        inString = 1;
-        printf("<B>\"");
-        c = getchar();
-        while (c != '"') {
-          goto runDown;
-          c = getchar();
-        }
-        inString = 0;
-        printf("\"</B>");
+    else if (currChar == '"') { // if the next character denotes the beginning of the string...
+      inString = 1; // puts status as within the string. 
+      printf("<B>\""); // puts initial tag for the string 
+      currChar = getchar(); // gets next character 
+      while (currChar != '"') { // until you reach the end quote... 
+        singleChar(currChar); // print current character
+        currChar = getchar(); // get next character 
       }
-     else {
-       printf("\"</B>");
-     }
+      printf("\"</B>"); // print end tag 
+      inString = 0; // change status of no longer being string
     }
+    
 
     // STRING LITERAL HANDLING END
 
     // CHARACTER HANDLING BEGIN
 
-    else if (c == '\'') { // if the next character is the beginning of a string....
-      printf("<B>\'");
-      printf("%c", singlechar(getchar()));
-      getchar(); // to process the closing apostrophe.
-      printf("\'</B>");
+    else if (currChar == '\'') { // if the next character is the beginning of a char...
+      printf("<B>\'"); // print start tag. 
+      currChar = getchar(); // get next character 
+      singleChar(currChar); // print said character.
+      currChar = getchar(); // to process the closing apostrophe.
+      printf("\'</B>"); // print the ending tag. 
     }
 
     // CHARACTER HANDLING END
 
-    // BACKWARD SLASH HANDLING BEGIN -- LINE SPLICES AND ESCAPES
 
-    else if (c == '\\') {
+    // BACKWARD SLASH HANDLING BEGIN -- LINE SPLICES AND ESCAPES
+    /*
+    else if (currChar == '\\') {
 
       if (inComment == 1) { // this means that there is a line splice in a line comment.
         if (getchar() == '\n') {
           goto single;
         }
         else {
-          c = getchar();
+          currChar = getchar();
           goto cases;
         }
       }
@@ -138,29 +146,33 @@ int main()
       else {
         if (inString == 1) {
           if (getchar() == '\n') {
-            
+
           }
           else {
-            c = getchar();
+            currChar = getchar();
             goto cases;
           }
         }
-        else {}
+        else {
+
+        }
       }
 
     }
+    */ 
+
 
     // FINAL CASE: not a special case
 
     else {
-      singlechar(c); // evaluate the character to see if it must be converted.
+      singleChar(currChar); // evaluate the character to see if it must be converted.
     }
 
-  c = getchar(); // AT THE END OF EACH EVALUATION, YOU ALWAYS GET THE NEXT CHARACTER.
+  currChar = getchar(); // AT THE END OF EACH EVALUATION, YOU ALWAYS GET THE NEXT CHARACTER.
 
   }
 
-  printf("</PRE>"); // finish by printing out the final PRE tag.
+  printf("\n</PRE>"); // finish by printing out the final PRE tag.
 
   return 0;
 }

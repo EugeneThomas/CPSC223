@@ -123,14 +123,38 @@ int main()
         // if this is a block comment...
         block:
           currChar = getchar(); // get the next character 
-          char nextChar = getchar(); // get the character after that
-          while (currChar != '*' || nextChar != '/') { // if this doesn't close the comment... 
+
+          whileLoop: 
+          while (currChar != '*') { // if this doesn't close the comment... 
             singleChar(currChar); // print the current character 
-            ungetchar(nextChar);  // these three lines turn current into next and next into the one after. 
             currChar = getchar(); 
-            nextChar = getchar(); 
           }
-          printf("*/</I>"); // print out ending tag 
+          printf("%c", currChar); // print the '*'. 
+
+          // to test the star position 
+          char testChar = getchar(); 
+          if (testChar != '\\' && testChar != '/') {
+            goto whileLoop; // * is used a normal character. 
+          } 
+          else if (testChar == '\\') {
+            while (testChar == '\\' && getchar() == '\n') {
+              printf("\\\n"); 
+              testChar = getchar();
+            }
+            if (testChar == '/') {
+              goto endComment;
+            }
+            else {
+              goto whileLoop; 
+            }
+          }
+          else {
+            goto endComment; 
+          }
+
+          endComment: 
+
+          printf("/</I>"); // print out ending tag 
           currChar = getchar(); // you get the next character post-comment 
           inComment = 0; // unmarks as part of comment 
           goto cases; // go back to cases

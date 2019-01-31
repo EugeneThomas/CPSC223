@@ -1,2 +1,3 @@
-<PRE><I>// this is a / test</I>
-</PRE>
+<PRE><I>/* this is 
+	another test *\
+/</I>ÿ</PRE>

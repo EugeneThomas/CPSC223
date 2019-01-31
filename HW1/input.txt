@@ -1,9 +1,9 @@
-char *hdr = "Code, string, and char constant; no comments";
+char *hdr = "Escaped double quote is string";
 
-int main() {
-    char c = '!';
-    int greet (char *, char);
+char  *aardvark = "\"",  *barnacle = "\"";
 
-    greet ("Hello world%c\n", c);
-    return 0;
-}
+char  *cardinal = "\"",                 /* Two-line version */
+      *devilray = "\"";
+
+char  *elephant;
+

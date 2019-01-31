@@ -122,6 +122,14 @@ int main()
                 printf("\\\n"); 
                 currChar = getchar();
               }
+              else if (c == '\'') {
+                printf("\\\'"); 
+                currChar = getchar();
+              }
+              else if (c == '\"') {
+                printf("\\\""); 
+                currChar = getchar();
+              }
               else {
                 printf("\\");
                 currChar = c; 

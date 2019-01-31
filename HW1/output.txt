@@ -1,10 +1,10 @@
-<PRE>char *hdr = <B>"Code, string, and char constant; no comments"</B>;
+<PRE>char *hdr = <B>"Escaped double quote is string"</B>;
 
-int main() {
-    char c = '!';
-    int greet (char *, char);
+char  *aardvark = <B>"\""</B>,  *barnacle = <B>"\""</B>;
 
-    greet (<B>"Hello world%c\n"</B>, c);
-    return 0;
-}
+char  *cardinal = <B>"\""</B>,                 <I>/* Two-line version */</I>
+      *devilray = <B>"\""</B>;
+
+char  *elephant;
+
 </PRE>

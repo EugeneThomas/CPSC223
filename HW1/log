@@ -41,7 +41,8 @@ ESTIMATE of time to complete assignment: 10 hours
                                Final edits for the night after office hours. 
 
      1/31  11:45 am    1:00    Was able to pass all 14 test cases as well as comment out all 
-                               ideas. Later today, I will discuss how to fight off edge cases. 
+                               ideas. Later today, I will discuss how to fight off edge cases
+                               that are not listed in the public tests.  
                        ----
                        9:00    TOTAL time spent
 
@@ -49,4 +50,16 @@ ESTIMATE of time to complete assignment: 10 hours
                                     Rabhya Mehrotra (member of CS223), Jamie Nachbar (member of CS223), 
                                     Manahal Tabassum (member of CS223), Joyce Wu (member of CS223) 
 
-     <A brief discussion of the major difficulties encountered>
+     One of the biggest challenges I faced in this assignment was becoming acquainted with the C language. 
+     Usually, my workflow consists of throwing a lot of my ideas out at a rapid-fire rate onto the computer 
+     and hoping that a lot of them stick. Of course, when they don't, I go back and see which ideas worked, 
+     which ideas needed slight changes, and which failed miserably; my process is a stream of consciousness. 
+     When I'm not familiar with the syntax (and what I can and can't do in C) it not only leads to more debugging 
+     (I wrote a lot of my initial code in Java by accident), but disrupts my workflow. Also, this is the first 
+     computer science assignment (outside of teaching middle schoolers) I have done in over a year, so it suffices
+     to say that I was pretty rusty in generating ideas in how to solve problems quickly and succinctly. Finally, 
+     because of my lack of knowledge on line splices and valid/invalid examples of C code, it made it very difficult
+     to not only attack the problem initially, but to come up with good edge cases as well. Overall, although
+     frustrating at times, this assignment allow me to communicate my ideas with others as well as solve a
+     pretty large problem by breaking it into smaller pieces. 
+

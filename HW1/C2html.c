@@ -96,9 +96,15 @@ int main()
         // if this is a single line comment...
         single:
           currChar = getchar(); // you get the next character 
-          while (currChar != '\n') { // while the device is on the same line. 
-            singleChar(currChar); // you print the appropriate form of the current character. 
-            currChar = getchar(); // you get the next character 
+          while (currChar != '\n' || currChar != EOF) { // while the device is on the same line. 
+            if (currChar == EOF) {
+              printf("</I>\n");
+              goto end;
+            }
+            else {
+              singleChar(currChar); // you print the appropriate form of the current character. 
+              currChar = getchar(); // you get the next character 
+            }
 
             // HANDLING OF A LINE SPLICE IN A SINGLE LINE COMMENT 
             while (currChar == '\\' && getchar() == '\n') {
@@ -192,6 +198,8 @@ int main()
   currChar = getchar(); // AT THE END OF EACH EVALUATION, YOU ALWAYS GET THE NEXT CHARACTER.
 
   }
+
+  end: 
 
   printf("</PRE>\n"); // finish by printing out the final PRE tag.
 

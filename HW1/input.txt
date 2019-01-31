@@ -1,3 +1,2 @@
-/* /* Inner comment? *\
-/ int barnacle;
-            /* Not! */ int cardinal;
+ 
+// hit or miss */ I guess

@@ -1,3 +1,4 @@
-<PRE><I>/* /* Inner comment? *\
-/</I> int barnacle;
-            <I>/* Not! */</I> int cardinal;</PRE>
+<PRE> 
+<I>// hit or miss */ I guess
+</I>
+</PRE>

@@ -95,6 +95,7 @@ int main()
 
         // if this is a single line comment...
         single:
+        
           currChar = getchar(); // you get the next character 
           while (currChar != '\n' || currChar != EOF) { // while the device is on the same line. 
             if (currChar == EOF) {
@@ -122,6 +123,7 @@ int main()
 
         // if this is a block comment...
         block:
+
           currChar = getchar(); // get the next character 
 
           whileLoop: 

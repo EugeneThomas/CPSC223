@@ -24,9 +24,9 @@
 
 void singleChar (char c)
 {
-    if (c == '&') printf("&amp");
-    else if (c == '<') printf("&lt");
-    else if (c == '>') printf("&gt");
+    if (c == '&') printf("&amp;");
+    else if (c == '<') printf("&lt;");
+    else if (c == '>') printf("&gt;");
     else printf("%c", c);
 }
 

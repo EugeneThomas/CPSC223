@@ -1,10 +1,24 @@
-<PRE>char *hdr = <B>"Escaped double quote is string"</B>;
+<PRE>char *hdr = <B>"Escaped double quote is string\n"</B>;
 
 char  *aardvark = <B>"\""</B>,  *barnacle = <B>"\""</B>;
 
 char  *cardinal = <B>"\""</B>,                 <I>/* Two-line version */</I>
       *devilray = <B>"\""</B>;
 
-char  *elephant;
+char  *elephant; 
+
+<I>// E\
+E\
+E\
+E\
+\
+\
+</I>
+<B>"This \
+is\
+the\ 
+quotacion"</B>
+
+<I>// E</I>
 
 </PRE>

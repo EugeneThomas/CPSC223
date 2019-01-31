@@ -75,7 +75,7 @@ int main()
             currChar = getchar(); // you get the next character 
 
             // HANDLING OF A LINE SPLICE IN A SINGLE LINE COMMENT 
-            if (currChar == '\\' && getchar() == '\n') {
+            while (currChar == '\\' && getchar() == '\n') {
               printf("\\\n"); 
               currChar = getchar();
             }
@@ -150,51 +150,6 @@ int main()
         goto cases; 
       }
     }
-    
-    // STRING LITERAL HANDLING END 
- 
-
-    // ESCAPE HANDLING BEGIN 
-       
-    // ESCAPE HANDLING END 
-
-    // LINE SPLICE HANDLING BEGIN
-        
-    // LINE SPLICE HANDLING END 
-
-    
- 
-    /*
-    else if (currChar == '\\') {
-
-      if (inComment == 1) { // this means that there is a line splice in a line comment.
-        if (getchar() == '\n') {
-          goto single;
-        }
-        else {
-          currChar = getchar();
-          goto cases;
-        }
-      }
-
-      else {
-        if (inString == 1) {
-          if (getchar() == '\n') {
-
-          }
-          else {
-            currChar = getchar();
-            goto cases;
-          }
-        }
-        else {
-
-        }
-      }
-
-    }
-    */ 
-
 
     // FINAL CASE: not a special case
 

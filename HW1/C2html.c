@@ -73,6 +73,14 @@ int main()
           while (currChar != '\n') { // while the device is on the same line. 
             singleChar(currChar); // you print the appropriate form of the current character. 
             currChar = getchar(); // you get the next character 
+
+            // HANDLING OF A LINE SPLICE IN A SINGLE LINE COMMENT 
+            if (currChar == '\\' && getchar() == '\n') {
+              printf("\\\n"); 
+              currChar = getchar();
+            }
+            //HANDLING OF A LINE SPLICE COMPLETE 
+
           } // this repeats until you reach a new line. once that is met... 
           printf("</I>\n"); // you print the ending tag 
           currChar = getchar(); // you get the next character post-comment
@@ -102,30 +110,43 @@ int main()
     // STRING LITERAL HANDLING BEGIN
 
     else if (currChar == '"') { // if the next character denotes the beginning of the string...
-      inString = 1; // puts status as within the string. 
-      printf("<B>\""); // puts initial tag for the string 
-      currChar = getchar(); // gets next character 
-      while (currChar != '"') { // until you reach the end quote... 
-        singleChar(currChar); // print current character
-        currChar = getchar(); // get next character 
+      if (inComment == 0) {
+        inString = 1; // puts status as within the string. 
+        printf("<B>\""); // puts initial tag for the string 
+        currChar = getchar(); // gets next character 
+        while (currChar != '"') { // until you reach the end quote... 
+          singleChar(currChar); // print current character
+          currChar = getchar(); // get next character 
+          // HANDLING OF A LINE SPLICE IN A QUOTE  
+            if (currChar == '\\' && getchar() == '\n') {
+              printf("\\\n"); 
+              currChar = getchar();
+            }
+          //HANDLING OF A LINE SPLICE COMPLETE 
+        }
+        printf("\"</B>"); // print end tag 
+        inString = 0; // change status of no longer being string
       }
-      printf("\"</B>"); // print end tag 
-      inString = 0; // change status of no longer being string
+      else {
+        printf("\"");
+        currChar = getchar(); 
+        goto cases; 
+      }
     }
     
     // STRING LITERAL HANDLING END 
-
-    else if (currChar == '\\') {
+ 
 
     // ESCAPE HANDLING BEGIN 
+       
     // ESCAPE HANDLING END 
 
     // LINE SPLICE HANDLING BEGIN
-
+        
     // LINE SPLICE HANDLING END 
 
-    }
     
+ 
     /*
     else if (currChar == '\\') {
 

@@ -1,10 +1,15 @@
 <PRE>char *hdr = <B>"Code, string, and char constant; no comments"</B>;
 
 int main() {
-    char c = <B>'!'</B>;
+    char c = '!';
     int greet (char *, char);
 
-    greet (<B>"Hello world%c\n"</B>, c);
+    greet (<B>"Hello world%c\"</B>, c);
     return 0;
+    <I>// "this is just a comment"</I>
+    <I>// this is just \
+    a comment</I>
+    <B>"THIS IS JUST \
+    UN QUOTE"</B>
 }
 </PRE>

@@ -6,4 +6,9 @@ int main() {
 
     greet ("Hello world%c\n", c);
     return 0;
+    // "this is just a comment"
+    // this is just \
+    a comment
+    "THIS IS JUST \ 
+    UN QUOTE"
 }

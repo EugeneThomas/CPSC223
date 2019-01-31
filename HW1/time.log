@@ -1,0 +1,76 @@
+ESTIMATE of time to complete assignment: 10 hours
+
+
+           Time        Time
+     Date  Started     Spent   Work completed
+     ----  -------     ----    --------------
+     1/27  5:30 pm     1:30    read background material; set up files; began to
+                               brainstorm ideas on how to tackle the multiple
+                               parts of the problem; split the assignment into
+                               smaller parts that could each be confronted at
+                               separate times; consulted with two of my peers
+                               about ways to attack the more rigorous parts of
+                               this assignment.
+
+     1/27  7:30 pm     1:30    After a break, I began to sketch out and write
+                               some of the methods. Here, I began to debug (b/c
+                               my inexperience in C was really showing in my
+                               lack of knowledge for some of the syntax). In other
+                               words, I accidentally coded three of the methods in
+                               Java syntax and needed to work backwards to debug.
+
+     1/27  10:15 pm    0:15    At this point, I realized that I wasn't going
+                               in the right direction in terms of solving this
+                               problem, I started over and sketched out how to do
+                               the practice example in a more neat way. I'll
+                               implement that tomorrow.
+
+     1/30  3:00 pm     1:00    Hour one of an energetic coding series. More to come.
+
+     1/30  4:15 pm     1:00    Hour two of coding, still have to do backward slashes.
+
+     1/30  8:15 pm     1:15    Spent time at office hours deugging and writing out how 
+                               to handle line splices. 
+
+     1/30  9:45 pm     0:30    Debugged and finalized the comments of the majority of 
+                               the code. The line splicing and escape character handling
+                               is what's left. 
+
+     1/30  10:35 pm    1:00    After another short break, I was able to reach more 
+                               conclusions concerning the line splices and escape characters. 
+                               Final edits for the night after office hours. 
+
+     1/31  11:45 am    1:00    Was able to pass all 14 test cases as well as comment out all 
+                               ideas. Later today, I will discuss how to fight off edge cases
+                               that are not listed in the public tests.  
+                       ----
+                       9:00    TOTAL time spent
+
+     I discussed my solution with:  Haiyao Liu (Prospective CS Major at UMass AMherst), 
+                                    Rabhya Mehrotra (member of CS223), Jamie Nachbar (member of CS223), 
+                                    Manahal Tabassum (member of CS223), Joyce Wu (member of CS223) 
+
+     One of the biggest challenges I faced in this assignment was becoming acquainted with the C language. 
+     Usually, my workflow consists of throwing a lot of my ideas out at a rapid-fire rate onto the computer 
+     and hoping that a lot of them stick. Of course, when they don't, I go back and see which ideas worked, 
+     which ideas needed slight changes, and which failed miserably; my process is a stream of consciousness. 
+     When I'm not familiar with the syntax (and what I can and can't do in C) it not only leads to more debugging 
+     (I wrote a lot of my initial code in Java by accident), but disrupts my workflow. Also, this is the first 
+     computer science assignment (outside of teaching middle schoolers) I have done in over a year, so it suffices
+     to say that I was pretty rusty in generating ideas in how to solve problems quickly and succinctly. Finally, 
+     because of my lack of knowledge on line splices and valid/invalid examples of C code, it made it very difficult
+     to not only attack the problem initially, but to come up with good edge cases as well. Overall, although
+     frustrating at times, this assignment allow me to communicate my ideas with others as well as solve a
+     pretty large problem by breaking it into smaller pieces. 
+
+     Note: I have no idea why I did this, but while I was submitting the homework incrementally, I was submitting 
+     each entry under a different number assignment. For example:
+
+      /../../c/cs223/bin/submit 1 C2html.c Makefile time.log, this is what I typed the first time. 
+
+      /../../c/cs223/bin/submit 2 C2html.c Makefile time.log, this is what I typed the second time. 
+
+      /../../c/cs223/bin/submit n C2html.c Makefile time.log for the nth submission until I reached my 9th submission and got an error. 
+
+     I will definitely clean that up for submissions 2-8, and hopefully this note and the log will suffice as proof for incremental workflow. 
+

@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS  = -g -Wall
+CFLAGS  = -g -Wall -std=c99 -pedantic
 TARGET = C2html
 all: C2html
 C2html: C2html.c

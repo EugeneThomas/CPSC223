@@ -1,6 +1,8 @@
-<PRE>char *hdr = <B>"Line splice within start-comment"</B>;
-
-char aardvark <I>/\
+<PRE>char flatworms<I>/\
+\
+\
 * is in season */</I>;
-char barnacle;
+
+char goldfish;
+
 </PRE>

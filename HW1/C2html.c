@@ -64,6 +64,7 @@ int main()
         }
         else if (currChar == '\\' && getchar() == '\n') {
           printf("<I>/\\\n");
+          currChar = getchar(); 
           while (currChar == '\\' && getchar() == '\n') {
               printf("\\\n"); 
               currChar = getchar();

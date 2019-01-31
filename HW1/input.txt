@@ -1,5 +1,7 @@
-char *hdr = "Line splice within start-comment";
-
-char aardvark /\
+char flatworms/\
+\
+\
 * is in season */;
-char barnacle;
+
+char goldfish;
+

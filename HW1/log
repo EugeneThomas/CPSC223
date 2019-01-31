@@ -63,3 +63,14 @@ ESTIMATE of time to complete assignment: 10 hours
      frustrating at times, this assignment allow me to communicate my ideas with others as well as solve a
      pretty large problem by breaking it into smaller pieces. 
 
+     Note: I have no idea why I did this, but while I was submitting the homework incrementally, I was submitting 
+     each entry under a different number assignment. For example:
+
+      /../../c/cs223/bin/submit 1 C2html.c Makefile time.log, this is what I typed the first time. 
+
+      /../../c/cs223/bin/submit 2 C2html.c Makefile time.log, this is what I typed the second time. 
+
+      /../../c/cs223/bin/submit n C2html.c Makefile time.log for the nth submission until I reached my 9th submission and got an error. 
+
+     I will definitely clean that up for submissions 2-8, and hopefully this note and the log will suffice as proof for incremental workflow. 
+

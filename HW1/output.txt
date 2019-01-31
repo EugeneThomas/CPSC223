@@ -4,7 +4,7 @@ int main() {
     char c = '!';
     int greet (char *, char);
 
-    greet (<B>"Hello world%c\"</B>, c);
+    greet (<B>"Hello world%c\n"</B>, c);
     return 0;
 }
 </PRE>

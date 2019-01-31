@@ -116,13 +116,22 @@ int main()
         currChar = getchar(); // gets next character 
         while (currChar != '"') { // until you reach the end quote... 
           // HANDLING OF A LINE SPLICE IN A QUOTE  
-            if (currChar == '\\' && getchar() == '\n') {
-              printf("\\\n"); 
-              currChar = getchar();
+            if (currChar == '\\') { 
+              char c = getchar(); 
+              if ( c == '\n') {
+                printf("\\\n"); 
+                currChar = getchar();
+              }
+              else {
+                printf("\\");
+                currChar = c; 
+              }
             }
           //HANDLING OF A LINE SPLICE COMPLETE 
-          singleChar(currChar); // print current character
-          currChar = getchar(); // get next character 
+            else {
+              singleChar(currChar); // print current character
+              currChar = getchar(); // get next character 
+            }
         }
         printf("\"</B>"); // print end tag 
         inString = 0; // change status of no longer being string

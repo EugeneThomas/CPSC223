@@ -160,7 +160,7 @@ int main()
 
   }
 
-  printf("\n</PRE>\n"); // finish by printing out the final PRE tag.
+  printf("</PRE>\n"); // finish by printing out the final PRE tag.
 
   return 0;
 }

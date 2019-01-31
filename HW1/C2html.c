@@ -56,19 +56,26 @@ int main()
       }
 
       else { // if it is not in a quote 
+
         inComment = 1; // you mark it as a part of the comment.
         currChar = getchar(); // get the next character 
+
         if (currChar == '/') {  // if a single line comment...
           printf("<I>//"); // you go to the single comment section. 
           goto single;
         }
+
+        // if the next character is a line splice... 
+
         else if (currChar == '\\' && getchar() == '\n') {
-          printf("<I>/\\\n");
-          currChar = getchar(); 
+          printf("<I>/\\\n"); // print out the beginning tag. 
+          currChar = getchar(); // get the next character. 
+          // WHILE THERE ARE CONSECUTIVE LINE SPLICES.... 
           while (currChar == '\\' && getchar() == '\n') {
               printf("\\\n"); 
-              currChar = getchar();
+              currChar = getchar(); // print out new line and get next character to see if that is also a line splice. 
             }
+          // if the first non line splice is a single line comment. 
           if (currChar == '/') {  // if a single line comment...
             printf("/"); // you go to the single comment section. 
             goto single;
@@ -78,9 +85,12 @@ int main()
             goto block;
           }
         }
+
+        // if this is neither a line splice nor a line comment, this must be a block comment. 
+
         else  {// if a block comment
           printf("<I>/*");
-          goto block;
+          goto block; // goto block method 
         }
 
         // if this is a single line comment...
@@ -126,27 +136,30 @@ int main()
     // STRING LITERAL HANDLING BEGIN
 
     else if (currChar == '"') { // if the next character denotes the beginning of the string...
+
+      // if you're NOT in a comment... 
+      
       if (inComment == 0) {
         inString = 1; // puts status as within the string. 
         printf("<B>\""); // puts initial tag for the string 
         currChar = getchar(); // gets next character 
         while (currChar != '"') { // until you reach the end quote... 
-          // HANDLING OF A LINE SPLICE IN A QUOTE  
-            if (currChar == '\\') { 
-              char c = getchar(); 
-              if ( c == '\n') {
+          // HANDLING OF A LINE SPLICE/ESCAPE IN A QUOTE  
+            if (currChar == '\\') { // if it is a backslash  
+              char c = getchar(); // get next character to see if it is an escape 
+              if ( c == '\n') { // if a new line...  
                 printf("\\\n"); 
                 currChar = getchar();
               }
-              else if (c == '\'') {
+              else if (c == '\'') { // if an espace single quote... 
                 printf("\\\'"); 
                 currChar = getchar();
               }
-              else if (c == '\"') {
+              else if (c == '\"') { // if an escape double quote 
                 printf("\\\""); 
                 currChar = getchar();
               }
-              else {
+              else { // if an escape for backslash... 
                 printf("\\");
                 currChar = c; 
               }
@@ -160,6 +173,9 @@ int main()
         printf("\"</B>"); // print end tag 
         inString = 0; // change status of no longer being string
       }
+
+      // if you're in a comment, none of this will process and it'll just return a quote... 
+
       else {
         printf("\"");
         currChar = getchar(); 

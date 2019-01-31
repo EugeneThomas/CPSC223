@@ -115,14 +115,14 @@ int main()
         printf("<B>\""); // puts initial tag for the string 
         currChar = getchar(); // gets next character 
         while (currChar != '"') { // until you reach the end quote... 
-          singleChar(currChar); // print current character
-          currChar = getchar(); // get next character 
           // HANDLING OF A LINE SPLICE IN A QUOTE  
             if (currChar == '\\' && getchar() == '\n') {
               printf("\\\n"); 
               currChar = getchar();
             }
           //HANDLING OF A LINE SPLICE COMPLETE 
+          singleChar(currChar); // print current character
+          currChar = getchar(); // get next character 
         }
         printf("\"</B>"); // print end tag 
         inString = 0; // change status of no longer being string

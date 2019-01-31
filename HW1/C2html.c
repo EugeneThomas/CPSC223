@@ -116,18 +116,6 @@ int main()
 
     // STRING LITERAL HANDLING END
 
-    // CHARACTER HANDLING BEGIN
-
-    else if (currChar == '\'') { // if the next character is the beginning of a char...
-      printf("<B>\'"); // print start tag. 
-      currChar = getchar(); // get next character 
-      singleChar(currChar); // print said character.
-      currChar = getchar(); // to process the closing apostrophe.
-      printf("\'</B>"); // print the ending tag. 
-    }
-
-    // CHARACTER HANDLING END
-
 
     // BACKWARD SLASH HANDLING BEGIN -- LINE SPLICES AND ESCAPES
     /*
@@ -172,7 +160,7 @@ int main()
 
   }
 
-  printf("\n</PRE>"); // finish by printing out the final PRE tag.
+  printf("\n</PRE>\n"); // finish by printing out the final PRE tag.
 
   return 0;
 }

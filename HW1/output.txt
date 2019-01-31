@@ -1,14 +1,10 @@
-<PRE><I>/* test.c */</I>
-main() { <I>// hey what's up hello</I>
-  print (<B>"Hello &lt&amp&gt!\n"</B>);  <I>// Hello world!</I>
-  <I>// Hi \ </I>
-  world. 
-  <I>/* you're 
-  		&amp&gt&gt&gt 
-  		too 
-  		cool 
-  		*/</I> 
-  		<B>'g'</B> 
-  		<B>"fjfe9v"</B>
+<PRE>char *hdr = <B>"Code, string, and char constant; no comments"</B>;
+
+int main() {
+    char c = <B>'!'</B>;
+    int greet (char *, char);
+
+    greet (<B>"Hello world%c\n"</B>, c);
+    return 0;
 }
 </PRE>

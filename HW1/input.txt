@@ -1,13 +1,9 @@
-/* test.c */
-main() { // hey what's up hello
-  print ("Hello <&>!\n");  // Hello world!
-  // Hi \ 
-  world. 
-  /* you're 
-  		&>>> 
-  		too 
-  		cool 
-  		*/ 
-  		'g' 
-  		"fjfe9v"
+char *hdr = "Code, string, and char constant; no comments";
+
+int main() {
+    char c = '!';
+    int greet (char *, char);
+
+    greet ("Hello world%c\n", c);
+    return 0;
 }

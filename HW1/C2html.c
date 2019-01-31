@@ -113,11 +113,19 @@ int main()
       inString = 0; // change status of no longer being string
     }
     
+    // STRING LITERAL HANDLING END 
 
-    // STRING LITERAL HANDLING END
+    else if (currChar == '\\') {
 
+    // ESCAPE HANDLING BEGIN 
+    // ESCAPE HANDLING END 
 
-    // BACKWARD SLASH HANDLING BEGIN -- LINE SPLICES AND ESCAPES
+    // LINE SPLICE HANDLING BEGIN
+
+    // LINE SPLICE HANDLING END 
+
+    }
+    
     /*
     else if (currChar == '\\') {
 

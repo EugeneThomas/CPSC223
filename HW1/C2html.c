@@ -95,12 +95,16 @@ int main()
 
         // if this is a single line comment...
         single:
-        
+
           currChar = getchar(); // you get the next character 
           while (currChar != '\n' || currChar != EOF) { // while the device is on the same line. 
             if (currChar == EOF) {
               printf("</I>\n");
               goto end;
+            }
+            else if (currChar == '\n') {
+              currChar = getchar(); 
+              break;
             }
             else {
               singleChar(currChar); // you print the appropriate form of the current character. 
@@ -221,6 +225,10 @@ int main()
     }
 
     // FINAL CASE: not a special case
+    else if (currChar == '\\') {
+      printf("\\");
+      currChar = getchar(); 
+    }
 
     else {
       singleChar(currChar); // evaluate the character to see if it must be converted.
@@ -235,4 +243,4 @@ int main()
   printf("</PRE>\n"); // finish by printing out the final PRE tag.
 
   return 0;
-}
+} 

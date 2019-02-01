@@ -49,12 +49,21 @@ ESTIMATE of time to complete assignment: 10 hours
                                up some loose ends in issues with the code that arose. Also, I 
                                commented those sections and began drafting up the challenges. 
 
+     1/31   5:00 pm    0:45    I worked on more edge cases, comparing them to the correct code. 
+                               I fixed small issues with my code as well as added comments. 
+
+     1/31   6:20 pm    0:45    Spending time doing a special case where line splices are placed as the final 
+                               character in the code. 
                        ----
-                       10:00    TOTAL time spent
+                       11:30   TOTAL time spent
 
      I discussed my solution with:  Haiyao Liu (Prospective CS Major at UMass AMherst), 
                                     Rabhya Mehrotra (member of CS223), Jamie Nachbar (member of CS223), 
-                                    Manahal Tabassum (member of CS223), Joyce Wu (member of CS223) 
+                                    Manahal Tabassum (member of CS223), Joyce Wu (member of CS223). 
+
+                                    By solution, I mean discussing potential strategies on how to solve 
+                                    my problems.
+
 
      One of the biggest challenges I faced in this assignment was becoming acquainted with the C language. 
      Usually, my workflow consists of throwing a lot of my ideas out at a rapid-fire rate onto the computer 

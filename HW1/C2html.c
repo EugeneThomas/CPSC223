@@ -102,11 +102,13 @@ int main()
               printf("</I>\n");
               goto end;
             }
+            else if (currChar == '\n') {
+              break;
+            }
             else {
               singleChar(currChar); // you print the appropriate form of the current character.
               currChar = getchar(); // you get the next character
             }
-
             // HANDLING OF A LINE SPLICE IN A SINGLE LINE COMMENT
             while (currChar == '\\' && getchar() == '\n') {
               printf("\\\n");
@@ -115,6 +117,7 @@ int main()
             //HANDLING OF A LINE SPLICE COMPLETE
 
           } // this repeats until you reach a new line. once that is met...
+
           printf("</I>\n"); // you print the ending tag
           currChar = getchar(); // you get the next character post-comment
           inComment = 0; // you unmark it as part of a comment.

@@ -385,7 +385,44 @@ Computational Complexity
     --> Procedure for answering questions that forces any algo to use certain resource.
     --> I.e. for sorting algorithms: this would be depended upon the number of comparisons.
     Model of computation --> what ops are allowed.
-    
+
+  Hangman
+    --> Guess all 11-13 _ill words
+      S = set of words
+      If the letter is i or l, answer Yes and insert the letter into the word.
+      Otherwise, if the letter, is not in S, answer no.
+      Else if size(S) > 2,
+        Answer YES and remove letter from S
+      Else, answer YES and insert letter.
+
+  Alternate Algorithm
+    --> S = set of words / initial letters
+    Question: Is there a [certain letter]?
+    A: All words in S vote
+       Majority rules and losers are removed from S.
+       Flip Coin if there is a tie.
+
+  Element Uniqueness Problem
+    Given n objects, are there any duplicates?
+    Equality Testing: This is described in the number of compares, n(n-1)/2
+
+  Computational Complexity of problems >= n(n-1)/2
+    S contains
+      (0): all photos are distinct
+      (i,j): The ith photo is equal to the jth photo, all other Pk are distinct.
+      size(S) = (N-1)(N)+/2 + 1
+    A: All configurations in S vote
+        Majority rules
+        Losers removed from S.
+    n = 4:
+      (0) -- a,b,c,d
+      (1,2) -- a,a,c,d
+      (1,3) -- a,b,a,d
+      (1,4) -- a,b,c,a
+      (2,3) -- a,b,b,d 
+      (2,4) -- a,b,c,b
+      (3,4) -- a,b,c,c
+
 
 
 

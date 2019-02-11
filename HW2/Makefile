@@ -1,10 +1,8 @@
 CC = gcc
 CFLAGS  = -g -Wall -std=c99 -pedantic
-TARGET = C2html
-all: C2html
-C2html: C2html.c
-	$(CC) $(CFLAGS) -o C2html C2html.c
-test: C2html
-	./C2html < input.txt > output.txt
+TARGET = PSched
+all: Psched
+Psched: Psched.c
+	$(CC) $(CFLAGS) -o Psched Psched.c
 clean:
-	$(RM) C2html
+	$(RM) Psched

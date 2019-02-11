@@ -336,6 +336,82 @@
   Looping Constructs
     --> for (<>;<>;<>)
     --> while ()
-    --> do... while (); 
+    --> do... while ();
     --> "Test at the top": for and while loops
     --> "Test at the bottom": executed at least once
+
+===========================================================================================================================================
+
+  2/4/19
+
+  How C uses memory
+
+    --> An address space consists of four segments:
+
+      1. Text Segment -- Machine Code and Constants [read-only]
+        a. Allocated at link time
+
+      2. Data -- Global variables and static locals variables [persistent storage]
+        a. Allocated at link time
+        b. keeps its values across function calls.
+        c. Global variables: defined outside of all functions and accessible from within any function
+        Advantages:
+          More convenient/efficient than long argument lists.
+          Persistent
+          Can create cleaner interfaces for functions
+        Disadvantages:
+          Abets unintended side effects
+          Bad effect on program structure
+        Rules for global variable usage:
+          + Use distinctive names --> no "foo" and no "i"
+          + Give explanatory comment --> give explanatory comment
+          + Must be justified in its use
+          + Use static globals if possible
+
+      3. Heap -- Dynamic Storage [grows upward]
+        a. Allocated at run time
+
+      4. Stack -- automatic locals, function arguments, temporary storage, control information [grows downward]
+        a. Allocated at run time
+
+===========================================================================================================================================
+
+2/11/19
+
+Computational Complexity
+  - Of algorithm --> the amount of resources it requires as a function of its size.
+  - Of problem --> the amount of resouce that algorithms require as a function of the size of its input.
+  Adversary Argument
+    --> Procedure for answering questions that forces any algo to use certain resource.
+    --> I.e. for sorting algorithms: this would be depended upon the number of comparisons.
+    Model of computation --> what ops are allowed.
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .

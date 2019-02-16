@@ -257,13 +257,13 @@ int main (int argc, char* argv[]) {
       printf("-opt %d\n", opt(numProc, times, lenTimes));
     }
     else if (strcmp(heuristics[ctr], "-lw") == 0) {
-      printf("-lw %d\n", lw(numProc, times, lenTimes));
+      printf("-lw  %d\n", lw(numProc, times, lenTimes));
     }
     else if (strcmp(heuristics[ctr], "-lwd") == 0) {
       printf("-lwd %d\n", lwd(numProc, times, lenTimes));
     }
     else if (strcmp(heuristics[ctr], "-bw") == 0) {
-      printf("-bw %d\n", bw(numProc, times, lenTimes));
+      printf("-bw  %d\n", bw(numProc, times, lenTimes));
     }
     else { // strcmp(heuristics[ctr], "-bwd") == 0
       printf("-bwd %d\n", bwd(numProc, times, lenTimes));

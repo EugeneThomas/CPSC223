@@ -216,10 +216,10 @@ int opt (int num, int times[], int len) {
 
   // Heuristic B: lowerBound
   int low = lowerBound(timeHolder, len, num);
-  printf("Lower bound: %d\n", low);
+  // printf("Lower bound: %d\n", low);
   // Heuristic C:
   int up = bwd(num, times, len);
-  printf("Upper bound: %d\n", up);
+  // printf("Upper bound: %d\n", up);
 
   // Heuristic D:
 

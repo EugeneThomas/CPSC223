@@ -45,23 +45,52 @@ int max (int arr[], int len) {
   return currMax; // return the max
 } // end max
 
+/*
+  closestToMax: Finds the index i in array arr such that target-(arr[i]+num) is a minimum.
+  Finds maximum of the array.
+  Used in bw.
+*/
+
+int closestToMax (int arr[], int len, int num, int target) {
+  int valid = 0; // returns 0 when there has yet to be a valid solution, 1 when there has been.
+  int index; // begin with base index
+  int diff; // target-arr[i]-num.
+  for (int i = 0; i < len; i++) { // for each element in the array.
+    if (arr[i] + num <= target) { // if the max does not change...
+      if (valid == 0) { // if there no valid solutions...
+        valid = 1; // make a valid solution
+        index = i; // this is the first index
+        diff = target-(arr[i]+num); // make this the initial difference
+      }
+      else { // if there exist valid solutions...
+        if ((target-(arr[i]+num)) < diff) { // if this new difference is less than the old one...
+          index = i; // this is the new index
+          diff = target-(arr[i]+num); // this is the new difference
+        }
+      }
+    } // end larger if
+  } // end for
+  return index; // return index that gives smallest difference.
+} // end closestToMax
+
 // MAX AND MIN END
 
 /*
-  SORTING
+  SORTING METOD
 */
 
-int* sort (int arr[], int len) {
+void sort (int arr[], int arr2[], int len) {
+  for (int i = 0; i < len; i++) {
+    arr2[i] = arr[i];
+  }
   for (int ctr = 1; ctr < len; ctr++) {
-    int currVal = arr[ctr]; // current value
+    int currVal = arr2[ctr]; // current value
     int currIndex = ctr; // current index
     while (currIndex > 0) { // while x is in bounds
-      if (currVal>arr[currIndex-1])  {
-
+      if (currVal>arr2[currIndex-1])  {
         // swap currVal and arr[currIndex-1]:
-        arr[currIndex] = arr[currIndex-1];
-        arr[currIndex-1] = currVal;
-
+        arr2[currIndex] = arr2[currIndex-1];
+        arr2[currIndex-1] = currVal;
         currIndex--; // subtract one from current index
       }
       else {
@@ -69,8 +98,10 @@ int* sort (int arr[], int len) {
       }
     } // end while
   } // end for loop
-  return arr;
+
+  // here, we copied the first arr, now we are dumping all of the data into the second one:
 } // end sort
+
 
 
 /*
@@ -116,11 +147,9 @@ int lw (int num, int times[], int len) {
 */
 
 int lwd (int num, int times[], int len) {
-  int* timesSorted = sort(times, len); // sorting method for time array
-  for (int ctr = 0; ctr < len; ctr++) { // add zeroes to each of the processors
-    times[ctr] = timesSorted[ctr]; // move from pointer to array
-  }
-  return lw(num,times,len); // return lw of the sorted array!
+  int timeHolder[len];
+  sort(times, timeHolder, len);
+  return lw(num,timeHolder,len); // return lw of the sorted array!
 } // end lwd
 
 /*
@@ -133,7 +162,29 @@ int lwd (int num, int times[], int len) {
 */
 
 int bw (int num, int times[], int len) { // note: fix this for the additional heuristic....
-  //write best workload heuristic 
+  // if an invalid input...
+  if (num < 1) {
+    return 0;
+  }
+
+  // if a valid input...
+  else {
+    int processors[num];
+    for (int ctr = 0; ctr < num; ctr++) { // add zeroes to each of the processors
+      processors[ctr] = 0;
+    }
+    for (int ctrT = 0; ctrT < len; ctrT++) { // add each of the time elements
+      int index = minIndex(processors, num);
+      if (processors[index]+times[ctrT] > max(processors,num)) { // if this changes the maximum, continue.
+        processors[index] += times[ctrT];
+      }
+      else { // if not, search for the closestToMax...
+        index = closestToMax(processors, num, times[ctrT], max(processors,num));
+        processors[index] += times[ctrT];
+      }
+    }
+    return max(processors, num); // returns the maximum.
+  }
 } // end bw
 
 /*
@@ -143,11 +194,9 @@ int bw (int num, int times[], int len) { // note: fix this for the additional he
 */
 
 int bwd (int num, int times[], int len) {
-  int* timesSorted = sort(times, len); // sorting method for time array
-  for (int ctr = 0; ctr < len; ctr++) { // add zeroes to each of the processors
-    times[ctr] = timesSorted[ctr]; // move from pointer to array
-  }
-  return bw(num,times,len); // return lw of the sorted array!
+  int timeHolder[len];
+  sort(times, timeHolder, len);
+  return bw(num,timeHolder,len); // return lw of the sorted array!
 } // end bwd
 
 // THE MAIN METHOD

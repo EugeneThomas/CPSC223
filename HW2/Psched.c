@@ -102,16 +102,19 @@ void sort (int arr[], int arr2[], int len) {
   // here, we copied the first arr, now we are dumping all of the data into the second one:
 } // end sort
 
-
-
-/*
-  opt:
-  Use backtracking to find an assignment that minimizes the largest workload.
-*/
-
-int opt (int num, int times[], int len) {
-  return 0;
-} // end opt
+// lower bound method
+int lowerBound (int arr[], int len, int num) {
+  int retSum = 0; // return sum
+  for (int i = 0; i < len; i++) { // add all values in arr
+    retSum += arr[i];
+  }
+  if (retSum%num == 0) { // return sum rounded up to nearest int
+    return retSum/num;
+  }
+  else {
+    return retSum/num + 1;
+  }
+}
 
 /*
   lw:
@@ -199,6 +202,33 @@ int bwd (int num, int times[], int len) {
   return bw(num,timeHolder,len); // return lw of the sorted array!
 } // end bwd
 
+
+/*
+  opt:
+  Use backtracking to find an assignment that minimizes the largest workload.
+*/
+
+int opt (int num, int times[], int len) {
+
+  // Heuristic A: Sort the array
+  int timeHolder[len];
+  sort(times, timeHolder, len);
+
+  // Heuristic B: lowerBound
+  int low = lowerBound(timeHolder, len, num);
+  printf("Lower bound: %d\n", low);
+  // Heuristic C:
+  int up = bwd(num, times, len);
+  printf("Upper bound: %d\n", up);
+
+  // Heuristic D:
+
+  // Heuristic E:
+
+  return low;
+} // end opt
+
+
 // THE MAIN METHOD
 
 int main (int argc, char* argv[]) {
@@ -234,7 +264,7 @@ int main (int argc, char* argv[]) {
         lenH++; // add to the length of the h list...
       }
       else {
-        // Diagnostic print: printf("Invalid input! Exiting this code!\n");
+        // printf("Invalid input! Exiting this code!\n");
         exit(0);
       }
     } // end if...

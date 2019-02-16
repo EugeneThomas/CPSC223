@@ -4,8 +4,16 @@ ESTIMATE of time to complete assignment: 10 hours
            Time        Time
      Date  Started     Spent   Work completed
      ----  -------     ----    --------------
-
+     2/14  11:00pm     1:00    Did diagnostic readings, reviewed C syntax
+     2/16  12:10pm     2:05    For some reason, binge-coding worked well here.
+                               I got the following done:
+                                  - set up for parsing through command arguments
+                                  - formatting for final answers
+                                  - creation of minIndex and return maximum methods
+                                  - sorting algorithm, bubble sort
+                                  - least workload heuristic
+                                  - bwd + lwd as corrolaries
                        ----
-                              TOTAL time spent
+                       3:05      TOTAL time spent
 
      I discussed my solution with:

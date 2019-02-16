@@ -34,7 +34,8 @@ void singleChar (char c)
 
 int main()
 {
-  printf("<PRE>"); // Begin with PRE tag
+  int c = atoi("2.3");
+  printf("%d", c); // Begin with PRE tag
   int inString = 0; // returns 1 if currently in a quote, returns 0 if not.
   int inComment = 0; // returns 1 if in line comment, returns 0 if not.
   char currChar = getchar(); // gets the first character

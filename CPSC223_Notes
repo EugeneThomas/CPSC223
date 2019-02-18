@@ -422,3 +422,48 @@ Computational Complexity
       (2,3) -- a,b,b,d
       (2,4) -- a,b,c,b
       (3,4) -- a,b,c,c
+
+===========================================================================================================================================
+
+2/18/19
+
+Pointers in C
+
+  v --> &v
+  p --> *p
+
+  CASTING = converting value of one type to another type
+  Pointers to objects of different types may not be assignment compatible
+  (e.g. different lengths and different formats).
+  char *pc;
+  int *pi;
+  pi = pc;
+  pi = (int *)pc;
+
+  Exception: void * universal pointer
+             void *pv;
+
+  void * malloc (size_t nbytes) {
+    // size_t is an unsigned long.
+    Allocate block of nbytes bytes in heap
+    Return pointer to beginning of block
+      (or null if cannot satisfy request)
+  }
+
+  void free (void *ptr) {
+    deallocate block of storage in heapcto which ptr points
+    no garbage collection
+    storage leak
+  }
+
+  void * realloc (void *ptr, size_t nbytes) {
+    allocate block of nbytes bytes
+    copies to new block from old
+    frees old block
+    return pointer to new block
+  }
+
+  efficiency hack: resize old block instead of copy/allocate/free
+  this may happen and you CANNOT assume it to be true.
+
+  

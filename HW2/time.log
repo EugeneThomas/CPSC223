@@ -5,6 +5,7 @@ ESTIMATE of time to complete assignment: 10 hours
      Date  Started     Spent   Work completed
      ----  -------     ----    --------------
      2/14  11:00pm     1:00    Did diagnostic readings, reviewed C syntax
+
      2/16  12:10pm     2:05    For some reason, binge-coding worked well here.
                                I got the following done:
                                   - set up for parsing through command arguments
@@ -13,13 +14,22 @@ ESTIMATE of time to complete assignment: 10 hours
                                   - sorting algorithm, bubble sort
                                   - least workload heuristic
                                   - bwd + lwd as corollaries
+
      2/16  3:00pm      1:00    Debugged in the sort algo to make it void
                                Hopefully only backtracking is necessary to implement now.
+
      2/17  6:30pm      2:00    Began to Draft out backtracking, implemented ps after a discussion
                                with a friend about backtracking and its applications. Will implement
                                heuristics for opt next.
+
      2/18  11:45am     0:30    Added heuristics A-D.
+
+     2/18  1:00pm      0:30    Fixed parts of heuristics A-D, accounted for Stress Testing
                        ----
-                       6:35      TOTAL time spent
+                       7:05    TOTAL time spent
 
      I discussed my solution with:
+
+     Challenges: Being sick haha, talk about heuristics, backtracking/review/its applications
+
+      

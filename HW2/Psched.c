@@ -333,8 +333,17 @@ int opt (int num, int processors[], int times[], int len, int posInTimes, int ta
 
 int main (int argc, char* argv[]) {
 
+  if (argc == 1) {
+    printf("No arguments!\n");
+    exit(0);
+  }
+
+
   // number of processors + print statement
   int numProc = atoi(argv[1]);
+  if (numProc > argc-2) { // if the number of processors is greater than the number of times, make the two equal. 
+    numProc = argc-2;
+  }
 
   // instantiates an array to hold all of the times
   int times[argc-2];

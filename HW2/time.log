@@ -24,12 +24,18 @@ ESTIMATE of time to complete assignment: 10 hours
 
      2/18  11:45am     0:30    Added heuristics A-D.
 
-     2/18  1:00pm      0:30    Fixed parts of heuristics A-D, accounted for Stress Testing
+     2/18  12:00pm     0:30    Fixed parts of heuristics A-D, accounted for Stress Testing.
+
+     2/18  3:30pm      0:55    Finished all heuristics, beginning to work on edge cases.
+
+     2/18  5:45pm      
                        ----
-                       7:05    TOTAL time spent
+                       8:00    TOTAL time spent
 
-     I discussed my solution with:
+     I discussed my solution with: Jamie Nachbar, Manahal Tabassum
 
-     Challenges: Being sick haha, talk about heuristics, backtracking/review/its applications
-
-      
+     The first challenging was being sick, which was entirely out of my control. Then, I had some issues
+     understanding what the heuristics were/how to implement them. It took a lot of trial and error. Also,
+     backtracking seemed to cause many problems since I had not done/seen backtracking in two years. I was
+     not only able to implement it, but also do some reading on other backtracking algorithms like Maze
+     Generators (my CPSC201 requirement assignment), NQueens, and Knight's Tour.

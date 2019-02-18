@@ -257,7 +257,7 @@ int ps (int num, int processors[], int times[], int len, int posInTimes, int tar
   Use backtracking to find an assignment that minimizes the largest workload.
 */
 
-int opt (int num, int processors[], int times[], int len, int posInTimes, int target) {
+int opt (int num, int processors[], int times[], int len, int posInTimes, int target, int posInProcessors) {
 
   int low = lowerBound(times, len, num);
 
@@ -273,7 +273,7 @@ int opt (int num, int processors[], int times[], int len, int posInTimes, int ta
 
   // taken directly from ps
 
-  for (int i = 0; i < num; i++) {  // for each processor
+  for (int i = posInProcessors; i < num; i++) {  // for each processor
 
     /*
     HEURSITIC B. Compute a lower bound on the maximum workload (by adding the run-times of
@@ -305,8 +305,14 @@ int opt (int num, int processors[], int times[], int len, int posInTimes, int ta
        lower numbers.
     */
     if (equalTo(processors, i) == 0) { // if it is not equalTo any of the elements that come before...
+      if (times[posInTimes-1] == times[posInTimes]) {
+        posInProcessors = i;
+      }
+      else {
+        posInProcessors = 0;
+      }
       processors[i] += times[posInTimes]; // add a time
-      int nextBest = opt(num, processors, times, len, posInTimes+1, target); // call the next element
+      int nextBest = opt(num, processors, times, len, posInTimes+1, target, posInProcessors); // call the next element
       if (nextBest < target) { // if this is a more viable option...
         target = nextBest; // change the target
       }
@@ -393,7 +399,7 @@ int main (int argc, char* argv[]) {
         }
         int timeSorted[lenTimes];
         sort(times, timeSorted, lenTimes);
-        optVal = opt(numProc, processors, timeSorted, lenTimes, 0, lwd(numProc, times, lenTimes));
+        optVal = opt(numProc, processors, timeSorted, lenTimes, 0, lwd(numProc, times, lenTimes), 0);
         ifOpt = 1;
       }
       printf("-opt %d\n", optVal);

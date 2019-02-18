@@ -305,7 +305,7 @@ int opt (int num, int processors[], int times[], int len, int posInTimes, int ta
        lower numbers.
     */
     if (equalTo(processors, i) == 0) { // if it is not equalTo any of the elements that come before...
-      if (times[posInTimes-1] == times[posInTimes]) {
+      if (times[posInTimes] == times[posInTimes+1]) {
         posInProcessors = i;
       }
       else {

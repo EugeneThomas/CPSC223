@@ -202,41 +202,85 @@ int bwd (int num, int times[], int len) {
   return bw(num,timeHolder,len); // return lw of the sorted array!
 } // end bwd
 
+/* ==============================================================================
+
+BACKTRACKING!
+
+int ps (...) {
+         if all tasks have been assigned to processors
+             return the maximum workload for this assignment or for the best
+                assignment seen so far, whichever is smaller
+         for each processor in the order P(0), ..., P(nProc-1)
+             assign the next unassigned task to that processor
+             call ps() recursively to find the smallest maximum workload given
+                that the tasks already assigned may not be reassigned
+             deassign the task just assigned
+         return the smallest maximum workload found
+     }
+
+two separate methods: int ps() and int opt().
+
+============================================================================== */
+
+int ps (int num, int processors[], int times[], int len, int posInTimes, int target) {
+
+  // base case if statement
+  if (posInTimes == len) { // if we've reached the end...
+    if (max(processors, num) >= target) { // return the lower one
+      return target;
+    }
+    else {
+      return max(processors, num);
+    }
+  }
+
+  //
+    for (int i = 0; i < num; i++) {  // for each processor
+      processors[i] += times[posInTimes]; // add a time
+      int nextBest = ps(num, processors, times, len, posInTimes+1, target); // call the next element
+      if (nextBest < target) { // if this is a more viable option...
+        target = nextBest; // change the target
+      }
+      processors[i] -= times[posInTimes]; // take out this element...
+    }
+    return target; // in the end, return the target. 
+} // end ps
 
 /*
+
   opt:
   Use backtracking to find an assignment that minimizes the largest workload.
+
+  A. Always pick an unassigned task with the longest run-time to assign next;
+      or, equivalently, sort the tasks in decreasing order of run-time and then
+      assign them in sequence.
+
+   B. Compute a lower bound on the maximum workload (by adding the run-times of
+      the individual tasks, dividing by the number of processors, and rounding
+      up to the nearest integer) and stop searching if a complete assignment
+      with that workload is ever found.
+
+   C. Keep track of the smallest maximum workload found previously (initially
+      this is the workload for the -lwd assignment as noted above) and ignore
+      any partial assignment that makes the workload for some processor at
+      least this large.
+
+   D. Do not assign a task to a processor with the same (current) workload as a
+      lower-numbered processor.
+
+   E. Do not assign succeeding tasks with the same run-time to processors with
+      lower numbers.
+
 */
 
-int opt (int num, int times[], int len) {
-
-  // Heuristic A: Sort the array
-  int timeHolder[len];
-  sort(times, timeHolder, len);
-
-  // Heuristic B: lowerBound
-  int low = lowerBound(timeHolder, len, num);
-  // printf("Lower bound: %d\n", low);
-  // Heuristic C:
-  int up = bwd(num, times, len);
-  // printf("Upper bound: %d\n", up);
-
-  // Heuristic D:
-
-  // Heuristic E:
-
-  return low;
+int opt (int num, int processors[], int times[], int len, int posInTimes, int target) {
+  return 0;
 } // end opt
 
 
 // THE MAIN METHOD
 
 int main (int argc, char* argv[]) {
-
-  // name of the program + diagnostic print statement
-  // mainly used to examine how argv[] works, commented out
-  // char* nameProgram = argv[0];
-  //printf("%s\n", nameProgram);
 
   // number of processors + print statement
   int numProc = atoi(argv[1]);
@@ -284,7 +328,11 @@ int main (int argc, char* argv[]) {
     // find the correct heuristic to work with, return the right heuristic..
 
     if (strcmp(heuristics[ctr], "-opt") == 0) {
-      printf("-opt %d\n", opt(numProc, times, lenTimes));
+      int processors[numProc];
+      for (int ctr = 0; ctr < numProc; ctr++) { // add zeroes to each of the processors
+        processors[ctr] = 0;
+      }
+      printf("-opt %d\n", ps(numProc, processors, times, lenTimes, 0, bwd(numProc, times, lenTimes)));
     }
     else if (strcmp(heuristics[ctr], "-lw") == 0) {
       printf("-lw  %d\n", lw(numProc, times, lenTimes));

@@ -14,8 +14,11 @@ ESTIMATE of time to complete assignment: 10 hours
                                   - least workload heuristic
                                   - bwd + lwd as corollaries
      2/16  3:00pm      1:00    Debugged in the sort algo to make it void
-                               Hopefully only backtracking is necessary to implement now. 
+                               Hopefully only backtracking is necessary to implement now.
+     2/17  6:30pm      2:00    Began to Draft out backtracking, implemented ps after a discussion
+                               with a friend about backtracking and its applications. Will implement
+                               heuristics for opt next. 
                        ----
-                       4:05      TOTAL time spent
+                       6:05      TOTAL time spent
 
      I discussed my solution with:

@@ -17,8 +17,9 @@ ESTIMATE of time to complete assignment: 10 hours
                                Hopefully only backtracking is necessary to implement now.
      2/17  6:30pm      2:00    Began to Draft out backtracking, implemented ps after a discussion
                                with a friend about backtracking and its applications. Will implement
-                               heuristics for opt next. 
+                               heuristics for opt next.
+     2/18  11:45am     0:30    Added heuristics A-D.
                        ----
-                       6:05      TOTAL time spent
+                       6:35      TOTAL time spent
 
      I discussed my solution with:

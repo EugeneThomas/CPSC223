@@ -14,6 +14,20 @@ Homework 2
 // MAX AND MIN
 
 /*
+  equalTo:
+  For an array arr, check if there are any elements before i such that arr[i] = arr[j].
+  return 1 if true, return 0 if not.
+*/
+
+int equalTo (int arr[], int i) {
+  for (int j = 0; j < i; j++) {
+    if (arr[i] == arr[j]) {
+      return 1;
+    }
+  }
+  return 0;
+}
+/*
   minIndex:
   Finds minimum index of the array.
 */
@@ -278,21 +292,6 @@ int opt (int num, int processors[], int times[], int len, int posInTimes, int ta
   }
   // HEURISTIC C ENDED
 
-
-  /*
-  HEURISITC D. Do not assign a task to a processor with the same (current) workload as a
-     lower-numbered processor.
-  */
-
-  // HEURISTIC D ENDED
-
-  /*
-  HEURISTIC E. Do not assign succeeding tasks with the same run-time to processors with
-     lower numbers.
-  */
-
-  // HEURISTIC E ENDED
-
   // base case if statement (taken directly from ps)
   if (posInTimes == len) { // if we've reached the end...
     if (max(processors, num) >= target) { // return the lower one
@@ -305,12 +304,29 @@ int opt (int num, int processors[], int times[], int len, int posInTimes, int ta
 
   // taken directly from ps
   for (int i = 0; i < num; i++) {  // for each processor
-    processors[i] += times[posInTimes]; // add a time
-    int nextBest = ps(num, processors, times, len, posInTimes+1, target); // call the next element
-    if (nextBest < target) { // if this is a more viable option...
-      target = nextBest; // change the target
+
+    /*
+    HEURISITC D. Do not assign a task to a processor with the same (current) workload as a
+       lower-numbered processor.
+    */
+
+    if (equalTo(processors, i) == 0) { // if it is not equalTo any of the elements that come before...
+      processors[i] += times[posInTimes]; // add a time
+      int nextBest = ps(num, processors, times, len, posInTimes+1, target); // call the next element
+      if (nextBest < target) { // if this is a more viable option...
+        target = nextBest; // change the target
+      }
+      processors[i] -= times[posInTimes]; // take out this element...
     }
-    processors[i] -= times[posInTimes]; // take out this element...
+    
+    // HEURISTIC D ENDED
+
+    /*
+    HEURISTIC E. Do not assign succeeding tasks with the same run-time to processors with
+       lower numbers.
+    */
+
+    // HEURISTIC E ENDED
   }
   return target; // in the end, return the target.
 
@@ -328,23 +344,22 @@ int main (int argc, char* argv[]) {
   // instantiates an array to hold all of the times
   int times[argc-2];
 
-  // instantiates an array to hold all of the heuristics
-  char* heuristics[argc-2];
+  // instantiates an array to hold all of the commands
+  char* commands[argc-2];
 
   // method to place all times into the time array
 
   int i = 2; // counter beginning at 2 for argument evaluation.
   int lenTimes = 0; // to find the length of the list of times
-  int lenH = 0; // to find the length of the heuristics list.
+  int lenC = 0; // to find the length of the commands list.
 
   // WHILE LOOP...
   while (argv[i] != NULL) { // while there are arguments...
     if (argv[i][0] == '-') { // if this begins with a -
       // if it's a heuristic....
       if (strcmp(argv[i], "-opt")*strcmp(argv[i], "-lw")*strcmp(argv[i], "-lwd")*strcmp(argv[i], "-bw")*strcmp(argv[i], "-bwd") == 0) {
-        heuristics[lenH] = argv[i]; // add to heuristics list...
-        // printf("%s\n", heuristics[lenH]); // diagnostic print
-        lenH++; // add to the length of the h list...
+        commands[lenC] = argv[i]; // add to commands list...
+        lenC++; // add to the length of the h list...
       }
       else {
         // printf("Invalid input! Exiting this code!\n");
@@ -361,12 +376,12 @@ int main (int argc, char* argv[]) {
   }
   // END WHILE LOOP
 
-  // Returns an answer for each of the heuristics.
-  for (int ctr = 0; ctr < lenH; ctr++) { // for each of the elements of the heuristics array
+  // Returns an answer for each of the commands.
+  for (int ctr = 0; ctr < lenC; ctr++) { // for each of the elements of the commands array
 
     // find the correct heuristic to work with, return the right heuristic..
 
-    if (strcmp(heuristics[ctr], "-opt") == 0) {
+    if (strcmp(commands[ctr], "-opt") == 0) {
       int processors[numProc];
       for (int ctr = 0; ctr < numProc; ctr++) { // add zeroes to each of the processors
         processors[ctr] = 0;
@@ -375,16 +390,16 @@ int main (int argc, char* argv[]) {
       sort(times, timeSorted, lenTimes);
       printf("-opt %d\n", opt(numProc, processors, timeSorted, lenTimes, 0, bwd(numProc, times, lenTimes)));
     }
-    else if (strcmp(heuristics[ctr], "-lw") == 0) {
+    else if (strcmp(commands[ctr], "-lw") == 0) {
       printf("-lw  %d\n", lw(numProc, times, lenTimes));
     }
-    else if (strcmp(heuristics[ctr], "-lwd") == 0) {
+    else if (strcmp(commands[ctr], "-lwd") == 0) {
       printf("-lwd %d\n", lwd(numProc, times, lenTimes));
     }
-    else if (strcmp(heuristics[ctr], "-bw") == 0) {
+    else if (strcmp(commands[ctr], "-bw") == 0) {
       printf("-bw  %d\n", bw(numProc, times, lenTimes));
     }
-    else { // strcmp(heuristics[ctr], "-bwd") == 0
+    else { // strcmp(commands[ctr], "-bwd") == 0
       printf("-bwd %d\n", bwd(numProc, times, lenTimes));
     }
 

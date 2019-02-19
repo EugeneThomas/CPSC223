@@ -341,8 +341,13 @@ int main (int argc, char* argv[]) {
 
   // number of processors + print statement
   int numProc = atoi(argv[1]);
-  if (numProc > argc-2) { // if the number of processors is greater than the number of times, make the two equal. 
+  if (numProc > argc-2) { // if the number of processors is greater than the number of times, make the two equal.
     numProc = argc-2;
+  }
+
+  if (numProc < 0)  {
+    printf("Negative number of processors!\n");
+    exit(0);
   }
 
   // instantiates an array to hold all of the times
@@ -384,7 +389,6 @@ int main (int argc, char* argv[]) {
     } // end if...
     else {
       times[lenTimes] = atoi(argv[i]); // returns 0 if invalid input, truncates any decimal
-      // printf("%d\n", times[lenTimes]); // diagnostic print
       lenTimes++;
     }
     i++; // counter
@@ -401,6 +405,8 @@ int main (int argc, char* argv[]) {
     // OPT
 
     if (strcmp(commands[ctr], "-opt") == 0) {
+
+      // 
       if (ifOpt == 0) {
         int processors[numProc];
         for (int ctr = 0; ctr < numProc; ctr++) { // add zeroes to each of the processors

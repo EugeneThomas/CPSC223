@@ -121,53 +121,90 @@ char* seg(char* line, int a, int b) {
 */
 
 //======================================== string replacement ========================================
-char* replace (char* line, char* flag, char* from, char* to) {
-
-  if (strcmp(from, to) == 0) {return line;}
+char* replace (char* line, char* flag[], char* from[], char* to[], int numFlags) {
 
   // variables...
-  int lenFrom = strlen(from); // length of the from
-  int lenLine = strlen(line); // length of the entire line
-  int lenTo = strlen(to); // length of the to
-  int ctr = 0; // line position/counter
-  size_t size = 0; // size that will be reallocated when necessary
-  char retArr[size]; // character array
-  int completed = 0; // if never completed: 0. if completed: 1.
+  int lenFrom;
+  int lenLine;
+  int lenTo;
+  int ctr;
+  size_t size = 0;
+  char retArr[size];
+  int completed;
   // variables end
 
-  // while the counter is less than the length of the line...
-  while (ctr < lenLine) {
-    char* fromComp = seg(line, ctr, ctr+lenFrom);
-    if (strcmp(fromComp, from) == 0) {
-      for (int i = ctr; i < (ctr+lenTo); i++) {
-        size++;
-        retArr[i] = to[i-ctr];
-      }
-      completed = 1; // mark as completed
-      ctr += lenFrom; // increases the counter by lenFrom amount
+  int i = 0;
+  while (i < numFlags) {
 
-      if (flag[2] == 'q') { // if the first flag denotes to quit...
-        size += (lenLine-ctr);
+    from[i] = (char*)realloc(from[i], sizeof(char));
+    printf("%s\n", from[i]);
+    to[i] = (char*)realloc(to[i], sizeof(char));
+    printf("%s\n", to[i]);
+    // note: find out how to pass through pointers.
+    lenFrom = strlen(from[i]); // length of the from
+    printf("%d\n", lenFrom);
+    lenLine = strlen(line); // length of the entire line
+    printf("%d\n", lenLine);
+    lenTo = strlen(to[i]); // length of the to
+    printf("%d\n", lenTo);
+    ctr = 0; // line position/counter
+    completed = 0; // if never completed: 0. if completed: 1.
+
+    // while the counter is less than the length of the line...
+    while (ctr < lenLine) {
+      char* fromComp = seg(line, ctr, ctr+lenFrom);
+      if (strcmp(fromComp, &from[i]) == 0) {
+        for (int j = ctr; j < (ctr+lenTo); j++) {
+          size++;
+          retArr[j] = to[j][i-ctr];
+        }
+        completed = 1; // mark as completed
+        ctr += lenFrom; // increases the counter by lenFrom amount
+
+        if (flag[i][2] == 'q') { // if the first flag denotes to quit...
+          size += (lenLine-ctr);
+          break;
+        }
+        // n and the blank input here are neglible.
+        else if (flag[i][2] == 'r') {
+          ctr = ctr - (lenFrom-1);
+        }
+        else if (flag[i][2] == 's') {
+          ctr = 0;
+        }
+      }
+
+      else { // if it does not match, then we will just add to the return array!
+        size++;
+        retArr[ctr] = line[ctr];
+        ctr++;
+      }
+
+    }
+
+    if (completed == 1) {
+      if (flag[i][1] == 'Q') {
         break;
       }
-      // n and the blank input here are neglible.
-      else if (flag[2] == 'r') {
-        ctr = ctr - (lenFrom-1);
+      else if (flag[i][1] == 'R') {
+        i++;
       }
-      else if (flag[2] == 's') {
-        ctr = 0;
+      else if (flag[i][1] == 'P') {
+        i = i;
       }
-
+      else if (flag[i][1] == 'S') {
+        if (i != 0) {
+          i--;
+        }
+      }
+      else {
+        i = 0;
+      }
     }
-
     else {
-      size++;
-      retArr[ctr] = line[ctr];
-      ctr++;
+      i++;
     }
-
   }
-
   // allocate 3 pieces of data for the return character
   char *retChar = malloc(lenLine);
   // copy the array into the literal
@@ -175,31 +212,6 @@ char* replace (char* line, char* flag, char* from, char* to) {
   return retChar;
 }
 //====================================== string replacement end =======================================
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //=============================================  main  ============================================
 
@@ -239,11 +251,11 @@ int main(int argc, char* argv[]) {
     else {
       size++;
       FLAGi[i/3-1] = parse(argv[i]);
-      // printf("\nFlag: %s\n", FLAGi[i/3-1]);
+      printf("\nFlag: %s\n", FLAGi[i/3-1]);
       FROMi[i/3-1]= argv[i+1];
-      // printf("From: %s\n", FROMi[i/3-1]);
+      printf("From: %s\n", FROMi[i/3-1]);
       TOi[i/3-1] = argv[i+2];
-      // printf("To: %s\n\n", TOi[i/3-1]);
+      printf("To: %s\n\n", TOi[i/3-1]);
     }
 
   }
@@ -263,9 +275,7 @@ int main(int argc, char* argv[]) {
   while (getline(&bufferString,&bufferSize,file) != -1) {
       bufferString = realloc(bufferString, bufferSize);
       char* line;
-      for (int i = 0; i < arrLength; i++) {
-        line = replace(bufferString, FLAGi[i], FROMi[i], TOi[i]);
-      }
+      line = replace(bufferString, FLAGi, FROMi, TOi, arrLength);
       printf("%s", line);
   }
 
